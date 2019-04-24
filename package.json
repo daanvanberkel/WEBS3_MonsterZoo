@@ -1,0 +1,24 @@
+{
+  "name": "webs3_monsterzoo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dummy-scss": "node-sass --watch dummy/scss -o dummy/css",
+    "scss": "node-sass --watch scss -o css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daanvanberkel/WEBS3_MonsterZoo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daanvanberkel/WEBS3_MonsterZoo/issues"
+  },
+  "homepage": "https://github.com/daanvanberkel/WEBS3_MonsterZoo#readme",
+  "dependencies": {
+    "node-sass": "^4.11.0"
+  }
+}
