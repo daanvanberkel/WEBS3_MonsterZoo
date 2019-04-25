@@ -8,13 +8,15 @@ $tile-size: 64px;
     height: 100%;
     display: flex;
     flex-flow: column;
+    background-image: url('../images/grass.png');
+    background-size: $tile-size;
 
     .row {
         display: flex;
 
         &.main-header {
             justify-content: center;
-            flex: 0 1 auto;
+            flex: 0 1 $tile-size;
         }
 
         &.main-row {
@@ -22,7 +24,7 @@ $tile-size: 64px;
         }
 
         &.main-footer {
-            flex: 0 1 auto;
+            flex: 0 1 $tile-size;
             justify-content: center;
         }
 
@@ -37,7 +39,6 @@ $tile-size: 64px;
 
         #statistics {
             width: 25%;
-            background-color: navy;
             position: relative;
             overflow: hidden;
 

@@ -38,16 +38,18 @@ table {
 .container {
   height: 100%;
   display: flex;
-  flex-flow: column; }
+  flex-flow: column;
+  background-image: url("../images/grass.png");
+  background-size: 64px; }
   .container .row {
     display: flex; }
     .container .row.main-header {
       justify-content: center;
-      flex: 0 1 auto; }
+      flex: 0 1 64px; }
     .container .row.main-row {
       flex: 1 1 auto; }
     .container .row.main-footer {
-      flex: 0 1 auto;
+      flex: 0 1 64px;
       justify-content: center; }
     .container .row * {
       box-sizing: border-box; }
@@ -56,7 +58,6 @@ table {
       background-color: orange; }
     .container .row #statistics {
       width: 25%;
-      background-color: navy;
       position: relative;
       overflow: hidden; }
       .container .row #statistics #statistics-content {
