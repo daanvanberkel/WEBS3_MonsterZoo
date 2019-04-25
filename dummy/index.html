@@ -8,20 +8,32 @@
 </head>
 <body>
     <div class="container">
-        <aside id="configurator">
-            <p>Hier komt de monster configurator</p>
-        </aside>
+        <header class="row main-header">
+            <button>Forest</button>
+            <button>Dessert</button>
+            <button>Snow</button>
+        </header>
 
-        <div id="zoo">
+        <div class="row main-row">
+            <aside id="configurator">
+                <p>Hier komt de monster configurator</p>
+            </aside>
+    
+            <div id="zoo">
+            </div>
+    
+            <aside id="statistics">
+                <div id="statistics-content">
+                    <p>Hier komen de statistieken van het monster</p>
+    
+                    <div id="monster-details"></div>
+                </div>
+            </aside>
         </div>
 
-        <aside id="statistics">
-            <div id="statistics-content">
-                <p>Hier komen de statistieken van het monster</p>
-
-                <div id="monster-details"></div>
-            </div>
-        </aside>
+        <footer class="row main-footer">
+            &copy; 2019 - Bader & Daan 
+        </footer>
     </div>
     <script type="module" src="scripts/index.js"></script>
 </body>

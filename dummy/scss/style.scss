@@ -5,62 +5,80 @@ $tile-size: 64px;
 @import 'reset';
 
 .container {
-    display: flex;
     height: 100%;
+    display: flex;
+    flex-flow: column;
 
-    * {
-        box-sizing: border-box;
-    }
+    .row {
+        display: flex;
 
-    #configurator {
-        width: 25%;
-        background-color: orange;
-    }
+        &.main-header {
+            justify-content: center;
+            flex: 0 1 auto;
+        }
 
-    #statistics {
-        width: 25%;
-        background-color: navy;
-        position: relative;
-        overflow: hidden;
+        &.main-row {
+            flex: 1 1 auto;
+        }
 
-        #statistics-content {
-            position: absolute;
-            right: -100%;
-            background-color: purple;
-            height: 100%;
-            width: 100%;
-            transition: 1s;
-            color: white;
+        &.main-footer {
+            flex: 0 1 auto;
+            justify-content: center;
+        }
 
-            &.show {
-                right: 0;
+        * {
+            box-sizing: border-box;
+        }
+
+        #configurator {
+            width: 25%;
+            background-color: orange;
+        }
+
+        #statistics {
+            width: 25%;
+            background-color: navy;
+            position: relative;
+            overflow: hidden;
+
+            #statistics-content {
+                position: absolute;
+                right: -100%;
+                background-color: purple;
+                height: 100%;
+                width: 100%;
+                transition: 1s;
+                color: white;
+
+                &.show {
+                    right: 0;
+                }
             }
         }
-    }
 
-    #zoo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        overflow-x: scroll;
-        background-image: url('../images/grass.png');
-        background-size: $tile-size;
-        
-        .zoo-grid {
+        #zoo {
             display: flex;
-            flex-direction: column;
             align-items: center;
-
-            .zoo-row {
+            justify-content: center;
+            width: 100%;
+            overflow-x: scroll;
+            background-size: $tile-size;
+            
+            .zoo-grid {
                 display: flex;
+                flex-direction: column;
+                align-items: center;
 
-                .zoo-cage {
-                    width: $tile-size;
-                    height: $tile-size;
-                    text-align: center;
-                    border: 1px solid;
-                    line-height: $tile-size;
+                .zoo-row {
+                    display: flex;
+
+                    .zoo-cage {
+                        width: $tile-size;
+                        height: $tile-size;
+                        text-align: center;
+                        border: 1px solid;
+                        line-height: $tile-size;
+                    }
                 }
             }
         }
