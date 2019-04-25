@@ -1,0 +1,28 @@
+.side-box {
+    background-color: #F6F6F6;
+    position: relative;
+    border: $first-border-size solid #5E546F;
+    // border-left: 0;
+    padding: 20px;
+    margin: $first-border-size + $second-border-size + $third-border-size;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0 - $first-border-size - $second-border-size;
+        left: 0 - $first-border-size - $second-border-size;
+        right: 0 - $first-border-size - $second-border-size;
+        bottom: 0 - $first-border-size - $second-border-size;
+        border: $second-border-size solid #7574BD;
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0 - $first-border-size - $second-border-size - $third-border-size;
+        left: 0 - $first-border-size - $second-border-size - $third-border-size;
+        right: 0 - $first-border-size - $second-border-size - $third-border-size;
+        bottom: 0 - $first-border-size - $second-border-size - $third-border-size;
+        border: $third-border-size solid black;
+    }
+}
