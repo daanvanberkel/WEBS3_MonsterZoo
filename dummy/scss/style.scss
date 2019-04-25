@@ -68,7 +68,7 @@ $third-border-size: 5px;
             align-items: center;
             justify-content: center;
             width: 100%;
-            overflow-x: scroll;
+            overflow-x: auto;
             background-size: $tile-size;
             
             .zoo-grid {
