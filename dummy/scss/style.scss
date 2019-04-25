@@ -1,5 +1,8 @@
 // Vars
 $tile-size: 64px;
+$first-border-size: 10px;
+$second-border-size: 5px;
+$third-border-size: 5px;
 
 // CSS reset
 @import 'reset';
@@ -8,8 +11,11 @@ $tile-size: 64px;
     height: 100%;
     display: flex;
     flex-flow: column;
-    background-image: url('../images/grass.png');
     background-size: $tile-size;
+
+    &.forest {
+        background-image: url('../images/Forest/grass1.png');
+    }
 
     .row {
         display: flex;
@@ -34,7 +40,32 @@ $tile-size: 64px;
 
         #configurator {
             width: 25%;
-            background-color: orange;
+            background-color: #F6F6F6;
+            position: relative;
+            border: $first-border-size solid #5E546F;
+            border-left: 0;
+            padding: 20px;
+            box-shadow: inset 0px 0 3px 0px grey, 5px 9px 34px 12px grey;
+
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0 - $first-border-size - $second-border-size;
+                left: 0 - $first-border-size - $second-border-size;
+                right: 0 - $first-border-size - $second-border-size;
+                bottom: 0 - $first-border-size - $second-border-size;
+                border: $second-border-size solid #7574BD;
+            }
+
+            &:after {
+                content: "";
+                position: absolute;
+                top: 0 - $first-border-size - $second-border-size - $third-border-size;
+                left: 0 - $first-border-size - $second-border-size - $third-border-size;
+                right: 0 - $first-border-size - $second-border-size - $third-border-size;
+                bottom: 0 - $first-border-size - $second-border-size - $third-border-size;
+                border: $third-border-size solid black;
+            }
         }
 
         #statistics {

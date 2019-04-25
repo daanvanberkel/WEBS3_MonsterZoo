@@ -39,8 +39,9 @@ table {
   height: 100%;
   display: flex;
   flex-flow: column;
-  background-image: url("../images/grass.png");
   background-size: 64px; }
+  .container.forest {
+    background-image: url("../images/Forest/grass1.png"); }
   .container .row {
     display: flex; }
     .container .row.main-header {
@@ -55,7 +56,28 @@ table {
       box-sizing: border-box; }
     .container .row #configurator {
       width: 25%;
-      background-color: orange; }
+      background-color: #F6F6F6;
+      position: relative;
+      border: 10px solid #5E546F;
+      border-left: 0;
+      padding: 20px;
+      box-shadow: inset 0px 0 3px 0px grey, 5px 9px 34px 12px grey; }
+      .container .row #configurator:before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        right: -15px;
+        bottom: -15px;
+        border: 5px solid #7574BD; }
+      .container .row #configurator:after {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+        border: 5px solid black; }
     .container .row #statistics {
       width: 25%;
       position: relative;
