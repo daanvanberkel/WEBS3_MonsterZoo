@@ -1,10 +1,10 @@
-import { ZooView } from "../views/zooView.js";
+import { MapView } from "../views/mapView.js";
 import { Zoo } from "../models/zoo.js";
 import { StatisticsView } from "../views/statisticsView.js";
 
 export class ZooController {
     constructor() {
-        this.zooView = new ZooView(this);
+        this.mapView = new MapView(this);
         this.statisticsView = new StatisticsView();
     }
 
@@ -30,9 +30,9 @@ export class ZooController {
         }
         `);
 
-        this.zooView.zoo = zoo;
+        this.mapView.zoo = zoo;
 
-        this.zooView.drawZoo();
+        this.mapView.drawMap();
     }
 
     handleClick(cage) {

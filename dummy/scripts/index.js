@@ -2,5 +2,5 @@
 
 import { ZooController } from "./controllers/zooController.js";
 
-const zooController = new ZooController(document.querySelector('#zoo'));
+const zooController = new ZooController();
 zooController.start();

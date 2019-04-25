@@ -60,28 +60,28 @@ table {
 
 .container.forest {
   background-image: url("../images/Forest/grass1.png"); }
-  .container.forest .row #zoo .zoo-grid .zoo-row .zoo-cage {
+  .container.forest .row #zoo .grid .row .tile {
     background-image: url("../images/Forest/grass2.png");
     background-size: 64px; }
-    .container.forest .row #zoo .zoo-grid .zoo-row .zoo-cage.obstacle:nth-child(even) {
+    .container.forest .row #zoo .grid .row .tile.obstacle:nth-child(even) {
       background-image: url("../images/Forest/obstacle1.png"); }
-    .container.forest .row #zoo .zoo-grid .zoo-row .zoo-cage.obstacle:nth-child(odd) {
+    .container.forest .row #zoo .grid .row .tile.obstacle:nth-child(odd) {
       background-image: url("../images/Forest/obstacle2.png"); }
-  .container.forest .row #zoo .zoo-grid .zoo-row .zoo-cage:nth-child(1) {
+  .container.forest .row #zoo .grid .row .tile:nth-child(1) {
     background-image: url("../images/Forest/border/left.png"); }
-  .container.forest .row #zoo .zoo-grid .zoo-row .zoo-cage:last-child {
+  .container.forest .row #zoo .grid .row .tile:last-child {
     background-image: url("../images/Forest/border/right.png"); }
-  .container.forest .row #zoo .zoo-grid .zoo-row:nth-child(1) .zoo-cage {
+  .container.forest .row #zoo .grid .row:nth-child(1) .tile {
     background-image: url("../images/Forest/border/top.png"); }
-  .container.forest .row #zoo .zoo-grid .zoo-row:nth-child(1) .zoo-cage:nth-child(1) {
+  .container.forest .row #zoo .grid .row:nth-child(1) .tile:nth-child(1) {
     background-image: url("../images/Forest/border/corner_top_left.png"); }
-  .container.forest .row #zoo .zoo-grid .zoo-row:nth-child(1) .zoo-cage:last-child {
+  .container.forest .row #zoo .grid .row:nth-child(1) .tile:last-child {
     background-image: url("../images/Forest/border/corner_top_right.png"); }
-  .container.forest .row #zoo .zoo-grid .zoo-row:last-child .zoo-cage {
+  .container.forest .row #zoo .grid .row:last-child .tile {
     background-image: url("../images/Forest/border/bottom.png"); }
-  .container.forest .row #zoo .zoo-grid .zoo-row:last-child .zoo-cage:nth-child(1) {
+  .container.forest .row #zoo .grid .row:last-child .tile:nth-child(1) {
     background-image: url("../images/Forest/border/corner_bottom_left.png"); }
-  .container.forest .row #zoo .zoo-grid .zoo-row:last-child .zoo-cage:last-child {
+  .container.forest .row #zoo .grid .row:last-child .tile:last-child {
     background-image: url("../images/Forest/border/corner_bottom_right.png"); }
 
 .container {
@@ -113,7 +113,7 @@ table {
         position: absolute;
         right: calc(-100% - 5px - 5px);
         width: 100%;
-        transition: 1s;
+        transition: 0.5s ease;
         margin-right: 0;
         border-right: 0; }
         .container .row #statistics #statistics-content.show {
@@ -123,15 +123,15 @@ table {
       align-items: center;
       justify-content: center;
       width: 100%;
-      overflow-x: scroll;
+      overflow-x: auto;
       background-size: 64px; }
-      .container .row #zoo .zoo-grid {
+      .container .row #zoo .grid {
         display: flex;
         flex-direction: column;
         align-items: center; }
-        .container .row #zoo .zoo-grid .zoo-row {
+        .container .row #zoo .grid .row {
           display: flex; }
-          .container .row #zoo .zoo-grid .zoo-row .zoo-cage {
+          .container .row #zoo .grid .row .tile {
             width: 64px;
             height: 64px;
             text-align: center;

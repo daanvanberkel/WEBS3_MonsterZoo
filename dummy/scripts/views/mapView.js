@@ -1,34 +1,34 @@
-import { CageView } from "./cageView.js";
+import { TileView } from "./tileView.js";
 
-export class ZooView {
+export class MapView {
     zoo;
 
     constructor(controller) {
         this.element = document.querySelector('#zoo');
         this.controller = controller;
-        this.cageView = new CageView();
+        this.tileView = new TileView();
     }
 
-    drawZoo() {
+    drawMap() {
         if (!this.zoo) {
             return;
         }
-
+    
         const grid = document.createElement('div');
-        grid.classList.add('zoo-grid');
+        grid.classList.add('grid');
 
         for(let r of this.zoo.grid) {
             const row = document.createElement('div');
-            row.classList.add('zoo-row');
+            row.classList.add('row');
 
-            for(let cage of r) {
+            for(let tile of r) {
                 const col = document.createElement('div');
-                col.classList.add('zoo-cage');
+                col.classList.add('tile');
                 col.addEventListener('click', e => {
-                    this.controller.handleClick(cage);
+                    this.controller.handleClick(tile);
                 });
 
-                this.cageView.drawCage(col, cage);
+                this.tileView.drawTile(col, tile);
 
                 row.appendChild(col);
             }

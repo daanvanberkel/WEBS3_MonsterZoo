@@ -5,9 +5,9 @@
 
         .row {
             #zoo {
-                .zoo-grid {
-                    .zoo-row {
-                        .zoo-cage {
+                .grid {
+                    .row {
+                        .tile {
                             background-image: url('../images/Forest/grass2.png');
                             background-size: $tile-size;
 
@@ -21,45 +21,45 @@
                         }
 
                         // Left column
-                        .zoo-cage:nth-child(1) {
+                        .tile:nth-child(1) {
                             background-image: url('../images/Forest/border/left.png');
                         }
 
                         // Right column
-                        .zoo-cage:last-child {
+                        .tile:last-child {
                             background-image: url('../images/Forest/border/right.png');
                         }
 
                         // Top row
                         &:nth-child(1) {
-                            .zoo-cage {
+                            .tile {
                                 background-image: url('../images/Forest/border/top.png');
                             }
 
                             // Top left tile
-                            .zoo-cage:nth-child(1) {
+                            .tile:nth-child(1) {
                                 background-image: url('../images/Forest/border/corner_top_left.png');
                             }
 
                             // Top right tile
-                            .zoo-cage:last-child {
+                            .tile:last-child {
                                 background-image: url('../images/Forest/border/corner_top_right.png');
                             }
                         }
 
                         // Bottom row
                         &:last-child {
-                            .zoo-cage {
+                            .tile {
                                 background-image: url('../images/Forest/border/bottom.png');    
                             }
 
                             // Bottom left tile
-                            .zoo-cage:nth-child(1) {
+                            .tile:nth-child(1) {
                                 background-image: url('../images/Forest/border/corner_bottom_left.png');
                             }
 
                             // Botom right tile
-                            .zoo-cage:last-child {
+                            .tile:last-child {
                                 background-image: url('../images/Forest/border/corner_bottom_right.png');
                             }
                         }
