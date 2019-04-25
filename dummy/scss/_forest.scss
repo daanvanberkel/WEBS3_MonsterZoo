@@ -7,16 +7,27 @@
             #zoo {
                 .zoo-grid {
                     .zoo-row {
+                        .zoo-cage {
+                            background-image: url('../images/Forest/grass2.png');
+                            background-size: $tile-size;
+
+                            &.obstacle:nth-child(even) {
+                                background-image: url('../images/Forest/obstacle1.png');
+                            }
+
+                            &.obstacle:nth-child(odd) {
+                                background-image: url('../images/Forest/obstacle2.png');
+                            }
+                        }
+
                         // Left column
                         .zoo-cage:nth-child(1) {
                             background-image: url('../images/Forest/border/left.png');
-                            background-size: $tile-size;
                         }
 
                         // Right column
                         .zoo-cage:last-child {
                             background-image: url('../images/Forest/border/right.png');
-                            background-size: $tile-size;
                         }
 
                         // Top row
