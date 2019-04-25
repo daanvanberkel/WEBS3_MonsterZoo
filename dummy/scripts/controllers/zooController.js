@@ -35,7 +35,10 @@ export class ZooController {
         this.mapView.drawMap();
     }
 
-    handleClick(cage) {
-        this.statisticsView.show(cage);
+    handleClick(tile) {
+        if (!tile.monster){
+            return;
+        }
+        this.statisticsView.show(tile);
     }
 }
