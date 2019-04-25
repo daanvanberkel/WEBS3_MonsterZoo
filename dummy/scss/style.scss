@@ -13,8 +13,63 @@ $third-border-size: 5px;
     flex-flow: column;
     background-size: $tile-size;
 
+    // Forest themed map
     &.forest {
         background-image: url('../images/Forest/grass1.png');
+
+        .row {
+            #zoo {
+                .zoo-grid {
+                    .zoo-row {
+                        // Left column
+                        .zoo-cage:nth-child(1) {
+                            background-image: url('../images/Forest/border/left.png');
+                            background-size: $tile-size;
+                        }
+
+                        // Right column
+                        .zoo-cage:last-child {
+                            background-image: url('../images/Forest/border/right.png');
+                            background-size: $tile-size;
+                        }
+
+                        // Top row
+                        &:nth-child(1) {
+                            .zoo-cage {
+                                background-image: url('../images/Forest/border/top.png');
+                            }
+
+                            // Top left tile
+                            .zoo-cage:nth-child(1) {
+                                background-image: url('../images/Forest/border/corner_top_left.png');
+                            }
+
+                            // Top right tile
+                            .zoo-cage:last-child {
+                                background-image: url('../images/Forest/border/corner_top_right.png');
+                            }
+                        }
+
+                        // Bottom row
+                        &:last-child {
+                            .zoo-cage {
+                                background-image: url('../images/Forest/border/bottom.png');    
+                            }
+
+                            // Bottom left tile
+                            .zoo-cage:nth-child(1) {
+                                background-image: url('../images/Forest/border/corner_bottom_left.png');
+                            }
+
+                            // Botom right tile
+                            .zoo-cage:last-child {
+                                background-image: url('../images/Forest/border/corner_bottom_right.png');
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .row {
@@ -108,7 +163,7 @@ $third-border-size: 5px;
                         width: $tile-size;
                         height: $tile-size;
                         text-align: center;
-                        border: 1px solid;
+                        // border: 1px solid;
                         line-height: $tile-size;
                     }
                 }

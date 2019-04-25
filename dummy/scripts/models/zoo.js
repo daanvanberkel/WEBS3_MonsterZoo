@@ -1,4 +1,5 @@
 import { Cage } from "./cage.js";
+import { EmptyTile } from "./emptyTile.js";
 
 export class Zoo {
     name = '';
@@ -30,8 +31,10 @@ export class Zoo {
         this.climate = json.climate;
         this.city = json['reference city'];
 
+        this.grid.push(this.createEmptyRow());
+
         for(let row of json.grid) {
-            const r = [];
+            const r = [new EmptyTile()];
 
             // TODO: Check if monsters are saved in localstorage and place monsters in right cages
             for(let col of row.Columns) {
@@ -44,7 +47,28 @@ export class Zoo {
                 r.push(c);
             }
 
+            r.push(new EmptyTile());
+
             this.grid.push(r);
         }
+
+        this.grid.push(this.createEmptyRow());
+    }
+
+    createEmptyRow() {
+        return [
+            new EmptyTile(),
+            new EmptyTile(),
+            new EmptyTile(),
+            new EmptyTile(),
+            new EmptyTile(),
+            new EmptyTile(),
+            new EmptyTile(),
+            new EmptyTile(),
+            new EmptyTile(),
+            new EmptyTile(),
+            new EmptyTile(),
+            new EmptyTile()
+        ];
     }
 }
