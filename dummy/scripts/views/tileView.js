@@ -3,7 +3,6 @@ import { EmptyTile } from "../models/emptyTile.js";
 export class TileView {
     drawTile(element, tile) {
         if (tile instanceof EmptyTile) {
-        //     element.style.background = 'blue';
             element.classList.add('empty-tile');
             return;
         }
