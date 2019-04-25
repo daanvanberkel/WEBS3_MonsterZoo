@@ -11,12 +11,16 @@
                             background-image: url('../images/Forest/grass2.png');
                             background-size: $tile-size;
 
-                            &.obstacle:nth-child(even) {
+                            &.obstacle-1 {
                                 background-image: url('../images/Forest/obstacle1.png');
                             }
 
-                            &.obstacle:nth-child(odd) {
+                            &.obstacle-2 {
                                 background-image: url('../images/Forest/obstacle2.png');
+                            }
+
+                            &.obstacle-3 {
+                                background-image: url('../images/Forest/obstacle3.png');
                             }
                         }
 

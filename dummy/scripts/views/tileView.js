@@ -9,10 +9,8 @@ export class TileView {
         }
 
         if (!tile.roomForMonster) {
-        //     element.style.background = 'brown';
-            element.classList.add('obstacle');
-        // } else {
-        //     element.style.background = 'green';
+            let randomImageId = Math.floor(Math.random() * 3) + 1;
+            element.classList.add(`obstacle-${randomImageId}`);
         }
     }
 }

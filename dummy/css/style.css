@@ -63,10 +63,12 @@ table {
   .container.forest .row #zoo .grid .row .tile {
     background-image: url("../images/Forest/grass2.png");
     background-size: 64px; }
-    .container.forest .row #zoo .grid .row .tile.obstacle:nth-child(even) {
+    .container.forest .row #zoo .grid .row .tile.obstacle-1 {
       background-image: url("../images/Forest/obstacle1.png"); }
-    .container.forest .row #zoo .grid .row .tile.obstacle:nth-child(odd) {
+    .container.forest .row #zoo .grid .row .tile.obstacle-2 {
       background-image: url("../images/Forest/obstacle2.png"); }
+    .container.forest .row #zoo .grid .row .tile.obstacle-3 {
+      background-image: url("../images/Forest/obstacle3.png"); }
   .container.forest .row #zoo .grid .row .tile:nth-child(1) {
     background-image: url("../images/Forest/border/left.png"); }
   .container.forest .row #zoo .grid .row .tile:last-child {
