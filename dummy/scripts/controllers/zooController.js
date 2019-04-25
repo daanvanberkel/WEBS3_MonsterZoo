@@ -8,27 +8,11 @@ export class ZooController {
         this.statisticsView = new StatisticsView();
     }
 
-    start() {
+    async start() {
         const zoo = new Zoo();
-        zoo.loadGrid(`
-        {
-            "name":"Jungle",
-            "climate":"bear grylls approved temperature",
-            "reference city": "Rio",
-            "grid": [
-                { "name":"Row1", "Columns":[ "1", "0", "0", "0", "1", "1", "0", "0", "0","1" ] },
-                { "name":"Row2", "Columns":[ "1", "0", "0", "1", "0", "0", "1", "0", "0","1" ] },
-                { "name":"Row3", "Columns":[ "1", "0", "1", "0", "0", "0", "0", "1", "0","1" ] },
-                { "name":"Row4", "Columns":[ "1", "1", "0", "0", "0", "0", "0", "0", "1","1" ] },
-                { "name":"Row5", "Columns":[ "1", "0", "0", "0", "0", "0", "0", "0", "0","1" ] },
-                { "name":"Row6", "Columns":[ "1", "1", "0", "0", "0", "0", "0", "0", "0","1" ] },
-                { "name":"Row7", "Columns":[ "1", "0", "1", "0", "0", "0", "0", "0", "0","1" ] },
-                { "name":"Row8", "Columns":[ "1", "0", "0", "1", "0", "0", "0", "0", "0","1" ] },
-                { "name":"Row9", "Columns":[ "1", "0", "0", "0", "1", "1", "0", "0", "0","1" ] },
-                { "name":"Row10", "Columns":[ "1", "0", "0", "0", "1", "1", "0", "0", "0","1" ] }
-            ]
-        }
-        `);
+        
+        let jsonGrid = await fetch("../../api/grid.json");
+        zoo.loadGrid(await jsonGrid.json());
 
         this.mapView.zoo = zoo;
 

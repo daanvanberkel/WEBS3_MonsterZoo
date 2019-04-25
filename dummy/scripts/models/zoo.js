@@ -7,15 +7,7 @@ export class Zoo {
     city = '';
     grid = [];
 
-    loadGrid(jsonString) {
-        let json = '';
-
-        try {
-            json = JSON.parse(jsonString);
-        } catch (e) {
-            console.log(`JSON error: ${e}`);
-            return;
-        }
+    loadGrid(json) {
 
         if (
             !json.name ||
@@ -56,19 +48,6 @@ export class Zoo {
     }
 
     createEmptyRow() {
-        return [
-            new EmptyTile(),
-            new EmptyTile(),
-            new EmptyTile(),
-            new EmptyTile(),
-            new EmptyTile(),
-            new EmptyTile(),
-            new EmptyTile(),
-            new EmptyTile(),
-            new EmptyTile(),
-            new EmptyTile(),
-            new EmptyTile(),
-            new EmptyTile()
-        ];
+        return Array(12).fill("Bader");
     }
 }
