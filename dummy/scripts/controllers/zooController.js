@@ -20,9 +20,6 @@ export class ZooController {
     }
 
     handleClick(tile) {
-        if (!tile.monster){
-            return;
-        }
         this.statisticsView.show(tile);
     }
 }
