@@ -12,11 +12,10 @@ export class ZooController {
         const zoo = new Zoo();
         
         let jsonGrid = await fetch("../../api/grid.json");
+
         zoo.loadGrid(await jsonGrid.json());
 
-        this.mapView.zoo = zoo;
-
-        this.mapView.drawMap();
+        this.mapView.drawMap(zoo);
     }
 
     handleClick(tile) {

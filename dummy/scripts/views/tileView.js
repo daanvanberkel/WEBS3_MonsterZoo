@@ -1,15 +1,22 @@
-import { EmptyTile } from "../models/emptyTile.js";
-
 export class TileView {
-    drawTile(element, tile) {
-        if (tile instanceof EmptyTile) {
-            element.classList.add('empty-tile');
-            return;
+
+    constructor(tile){
+        this.tile = tile;
+    }
+
+    drawTile(){
+        let htmlTile = document.createElement('div');
+        htmlTile.classList.add('tile');
+
+        if (this.tile.isBorderTile) {
+            htmlTile.classList.add('empty-tile');
         }
 
-        if (!tile.roomForMonster) {
+        if (this.tile.isObstacle) {
             let randomImageId = Math.floor(Math.random() * 3) + 1;
-            element.classList.add(`obstacle-${randomImageId}`);
+            htmlTile.classList.add(`obstacle-${randomImageId}`);
         }
+        
+        return htmlTile;
     }
 }

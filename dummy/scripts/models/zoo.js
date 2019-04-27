@@ -1,5 +1,4 @@
-import { Cage } from "./cage.js";
-import { EmptyTile } from "./emptyTile.js";
+import { Tile } from "./tile.js";
 
 export class Zoo {
     name = '';
@@ -7,8 +6,15 @@ export class Zoo {
     city = '';
     grid = [];
 
-    loadGrid(json) {
 
+    /**
+     * Load object properties from json data.
+     * 
+     * @param {JSON} json 
+     */
+    loadGrid(json) {
+        
+        // check if json is valid
         if (
             !json.name ||
             !json.climate ||
@@ -18,35 +24,52 @@ export class Zoo {
             console.log('JSON not valid');
             return;
         }
-
+        
         this.name = json.name;
         this.climate = json.climate;
         this.city = json['reference city'];
 
-        this.grid.push(this.createEmptyRow());
-
-        for(let row of json.grid) {
-            const r = [new EmptyTile()];
+        // loop trough grid rows
+        for(let jsonRow of json.grid) {
+            
+            let tileRow = []
 
             // TODO: Check if monsters are saved in localstorage and place monsters in right cages
-            for(let col of row.Columns) {
-                const c = new Cage();
+            
+            // add the column to the row
+            for(let jsonCol of jsonRow.Columns) {
+
+                const tile = new Tile();
                 
-                if (col == 1) {
-                    c.roomForMonster = false;
+                // set obstacle tile if true
+                if (jsonCol == 1) {
+                    tile.setObstacleTile();
                 }
 
-                r.push(c);
+                tileRow.push(tile);
             }
 
-            r.push(new EmptyTile());
-
-            this.grid.push(r);
+            // add row to grid
+            this.grid.push(tileRow);
         }
 
-        this.grid.push(this.createEmptyRow());
+        // add left and right border for each row
+        for(let rowIndex in this.grid){
+            this.grid[rowIndex].unshift(new Tile({isBorderTile: true}));
+            this.grid[rowIndex].push(new Tile({isBorderTile: true}));
+        }
+
+        // add top and bottom row
+        this.grid.unshift(Array(12).fill(new Tile({isBorderTile: true})))
+        this.grid.push(Array(12).fill(new Tile({isBorderTile: true})))
     }
 
+
+    /**
+     * Method to add 12 empty tiles to the grid
+     * 
+     * @returns {Array}
+     */
     createEmptyRow() {
         return Array(12).fill("Bader");
     }

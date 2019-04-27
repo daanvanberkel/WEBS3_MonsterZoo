@@ -1,39 +1,49 @@
 import { TileView } from "./tileView.js";
 
 export class MapView {
-    zoo;
 
     constructor(controller) {
         this.element = document.querySelector('#zoo');
         this.controller = controller;
-        this.tileView = new TileView();
     }
 
-    drawMap() {
-        if (!this.zoo) {
+    /**
+     * Render HTML layout from Zoo Model
+     * 
+     * @param {Models/Zoo} zoo
+     */
+    drawMap(zoo) {
+
+        // stop render if model empty
+        if (!zoo) {
             return;
         }
-    
+
+        // create grid
         const grid = document.createElement('div');
         grid.classList.add('grid');
 
-        for(let r of this.zoo.grid) {
-            const row = document.createElement('div');
-            row.classList.add('row');
+        // loop trough rows in zoo grid
+        for(let row of zoo.grid) {
 
-            for(let tile of r) {
-                const col = document.createElement('div');
-                col.classList.add('tile');
-                col.addEventListener('click', e => {
+            // create html row
+            const htmlRow = document.createElement('div');
+            htmlRow.classList.add('row');
+            
+            // loop trough tiles in the row
+            for(let tile of row) {
+
+                let objTile = new TileView(tile);
+                let htmlTile = objTile.drawTile();
+
+                htmlTile.addEventListener('click', e => {
                     this.controller.handleClick(tile);
                 });
 
-                this.tileView.drawTile(col, tile);
-
-                row.appendChild(col);
+                htmlRow.appendChild(htmlTile);
             }
 
-            grid.appendChild(row);
+            grid.appendChild(htmlRow);
         }
 
         this.element.appendChild(grid);
