@@ -43,7 +43,7 @@ export class Zoo {
                 
                 // set obstacle tile if true
                 if (jsonCol == 1) {
-                    tile.setObstacleTile();
+                    tile.isObstacle = true;
                 }
 
                 tileRow.push(tile);
@@ -62,15 +62,5 @@ export class Zoo {
         // add top and bottom row
         this.grid.unshift(Array(12).fill(new Tile({isBorderTile: true})))
         this.grid.push(Array(12).fill(new Tile({isBorderTile: true})))
-    }
-
-
-    /**
-     * Method to add 12 empty tiles to the grid
-     * 
-     * @returns {Array}
-     */
-    createEmptyRow() {
-        return Array(12).fill("Bader");
     }
 }

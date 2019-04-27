@@ -33,8 +33,8 @@ export class MapView {
             // loop trough tiles in the row
             for(let tile of row) {
 
-                let objTile = new TileView(tile);
-                let htmlTile = objTile.drawTile();
+                // create html of the tile
+                let htmlTile = new TileView(tile).drawTile();
 
                 htmlTile.addEventListener('click', e => {
                     this.controller.handleClick(tile);

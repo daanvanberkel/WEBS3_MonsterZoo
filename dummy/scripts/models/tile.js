@@ -3,6 +3,11 @@ export class Tile {
     isObstacle = false;
     isBorderTile = false
 
+    /**
+     * Fill local properties from JSON Array
+     * 
+     * @param {JSON} properties 
+     */
     constructor(properties){
         
         if (properties == undefined){
@@ -12,9 +17,5 @@ export class Tile {
         for(var item in properties){
             this[item] = properties[item];
         }
-    }
-
-    setObstacleTile(){
-        this.isObstacle = true;
     }
 }
