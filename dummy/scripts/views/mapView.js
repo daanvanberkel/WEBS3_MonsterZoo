@@ -19,11 +19,6 @@ export class MapView {
      */
     drawMap(zoo) {
 
-        // stop render if model empty
-        if (!zoo) {
-            return;
-        }
-
         // create grid
         const grid = document.createElement('div');
         grid.classList.add('grid');

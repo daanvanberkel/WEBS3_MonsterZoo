@@ -1,6 +1,6 @@
 import { MapView } from "../views/mapView.js";
-import { Zoo } from "../models/zoo.js";
 import { StatisticsView } from "../views/statisticsView.js";
+import { Zoo } from "../models/zoo.js";
 
 export class ZooController {
     constructor() {
