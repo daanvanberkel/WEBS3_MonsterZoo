@@ -4,6 +4,11 @@ export class TileView {
         this.tile = tile;
     }
 
+    /**
+     * Render DOM component from tile properties
+     * 
+     * @returns {DOMElement}
+     */
     drawTile(){
         let htmlTile = document.createElement('div');
         htmlTile.classList.add('tile');

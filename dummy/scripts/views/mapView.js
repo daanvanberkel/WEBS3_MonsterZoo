@@ -2,9 +2,14 @@ import { TileView } from "./tileView.js";
 
 export class MapView {
 
-    constructor(controller) {
+    /**
+     * Bind to HTML element and ZooController
+     * 
+     * @param {ZooController} controller 
+     */
+    constructor(zooController) {
         this.element = document.querySelector('#zoo');
-        this.controller = controller;
+        this.controller = zooController;
     }
 
     /**

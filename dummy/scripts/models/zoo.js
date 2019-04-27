@@ -6,7 +6,6 @@ export class Zoo {
     city = '';
     grid = [];
 
-
     /**
      * Load object properties from json data.
      * 
