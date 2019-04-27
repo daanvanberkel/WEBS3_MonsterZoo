@@ -19,6 +19,9 @@ export class MapView {
      */
     drawMap(zoo) {
 
+        // clear grid
+        this.element.innerHTML = "";
+
         // create grid
         const grid = document.createElement('div');
         grid.classList.add('grid');
