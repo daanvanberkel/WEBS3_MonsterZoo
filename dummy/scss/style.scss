@@ -19,6 +19,26 @@ $third-border-size: 5px;
     flex-flow: column;
     background-size: $tile-size;
 
+    &.fade-out{
+        animation: fade-out 300ms;
+        animation-fill-mode: forwards;
+    }
+
+    &.fade-in{
+        animation: fade-in 300ms;
+        animation-fill-mode: forwards;
+    }
+    
+    @keyframes fade-out{
+        0%   { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    @keyframes fade-in{
+        0%   { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
     .row {
         display: flex;
 

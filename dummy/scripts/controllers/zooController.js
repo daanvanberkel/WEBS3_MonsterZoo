@@ -6,7 +6,7 @@ export class ZooController {
     constructor() {
         this.mapView = new MapView(this);
         this.statisticsView = new StatisticsView();
-
+        this.mainContainer = document.querySelector(".container");
         this.addMapSwitchHandlers();
     }
 
@@ -26,14 +26,15 @@ export class ZooController {
 
         this.mapView.drawMap(zoo);
 
-        
+        this.mainContainer.classList.remove('fade-out');
+        this.mainContainer.classList.add('fade-in');
     }
 
     handleClick(tile) {
         this.statisticsView.show(tile);
     }
 
-    addMapSwitchHandlers(){
+    async addMapSwitchHandlers(){
 
         document.querySelector('.main-header').addEventListener('click', e => {
             if (e.target.dataset.map == undefined){
@@ -42,17 +43,24 @@ export class ZooController {
             
             // TODO: LOAD MAP FROM API
 
-            // add class to map
-            let mainContainer = document.querySelector(".container");
-            mainContainer.classList.remove("forest", "desert", "snow");
-            mainContainer.classList.add(e.target.dataset.map);
+            // fade map out
+            this.mainContainer.classList.remove('fade-in');
+            this.mainContainer.classList.add('fade-out');
 
-            // disable clicked button
-            let buttons = document.querySelectorAll('.map_button');
-            buttons.forEach(button => button.disabled = false);
-            e.target.disabled = true;
+            // wait for fade out
+            setTimeout(() => {
+                
+                this.mainContainer.classList.remove("forest", "desert", "snow");
+                this.mainContainer.classList.add(e.target.dataset.map);
 
-            this.start(e.target.dataset.map);
+                // disable clicked button
+                let buttons = document.querySelectorAll('.map_button');
+                buttons.forEach(button => button.disabled = false);
+                e.target.disabled = true;
+
+                this.start(e.target.dataset.map);
+            }, 500);
+            
         });
     }
 }
