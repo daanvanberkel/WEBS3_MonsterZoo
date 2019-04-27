@@ -59,9 +59,9 @@ table {
     border: 5px solid black; }
 
 .container.forest {
-  background-image: url("../images/Forest/grass1.png"); }
+  background-image: url("../images/Forest/background.png"); }
   .container.forest .row #zoo .grid .row .tile {
-    background-image: url("../images/Forest/grass2.png");
+    background-image: url("../images/Forest/tile.png");
     background-size: 64px; }
     .container.forest .row #zoo .grid .row .tile.obstacle-1 {
       background-image: url("../images/Forest/obstacle1.png"); }
@@ -76,15 +76,71 @@ table {
   .container.forest .row #zoo .grid .row:nth-child(1) .tile {
     background-image: url("../images/Forest/border/top.png"); }
   .container.forest .row #zoo .grid .row:nth-child(1) .tile:nth-child(1) {
-    background-image: url("../images/Forest/border/corner_top_left.png"); }
+    background-image: url("../images/Forest/border/top_left.png"); }
   .container.forest .row #zoo .grid .row:nth-child(1) .tile:last-child {
-    background-image: url("../images/Forest/border/corner_top_right.png"); }
+    background-image: url("../images/Forest/border/top_right.png"); }
   .container.forest .row #zoo .grid .row:last-child .tile {
     background-image: url("../images/Forest/border/bottom.png"); }
   .container.forest .row #zoo .grid .row:last-child .tile:nth-child(1) {
-    background-image: url("../images/Forest/border/corner_bottom_left.png"); }
+    background-image: url("../images/Forest/border/bottom_left.png"); }
   .container.forest .row #zoo .grid .row:last-child .tile:last-child {
-    background-image: url("../images/Forest/border/corner_bottom_right.png"); }
+    background-image: url("../images/Forest/border/bottom_right.png"); }
+
+.container.desert {
+  background-image: url("../images/Desert/background.png"); }
+  .container.desert .row #zoo .grid .row .tile {
+    background-image: url("../images/Desert/tile.png");
+    background-size: 64px; }
+    .container.desert .row #zoo .grid .row .tile.obstacle-1 {
+      background-image: url("../images/Desert/obstacle1.png"); }
+    .container.desert .row #zoo .grid .row .tile.obstacle-2 {
+      background-image: url("../images/Desert/obstacle2.png"); }
+    .container.desert .row #zoo .grid .row .tile.obstacle-3 {
+      background-image: url("../images/Desert/obstacle3.png"); }
+  .container.desert .row #zoo .grid .row .tile:nth-child(1) {
+    background-image: url("../images/Desert/border/left.png"); }
+  .container.desert .row #zoo .grid .row .tile:last-child {
+    background-image: url("../images/Desert/border/right.png"); }
+  .container.desert .row #zoo .grid .row:nth-child(1) .tile {
+    background-image: url("../images/Desert/border/top.png"); }
+  .container.desert .row #zoo .grid .row:nth-child(1) .tile:nth-child(1) {
+    background-image: url("../images/Desert/border/top_left.png"); }
+  .container.desert .row #zoo .grid .row:nth-child(1) .tile:last-child {
+    background-image: url("../images/Desert/border/top_right.png"); }
+  .container.desert .row #zoo .grid .row:last-child .tile {
+    background-image: url("../images/Desert/border/bottom.png"); }
+  .container.desert .row #zoo .grid .row:last-child .tile:nth-child(1) {
+    background-image: url("../images/Desert/border/bottom_left.png"); }
+  .container.desert .row #zoo .grid .row:last-child .tile:last-child {
+    background-image: url("../images/Desert/border/bottom_right.png"); }
+
+.container.snow {
+  background-image: url("../images/Snow/background.png"); }
+  .container.snow .row #zoo .grid .row .tile {
+    background-image: url("../images/Snow/tile.png");
+    background-size: 64px; }
+    .container.snow .row #zoo .grid .row .tile.obstacle-1 {
+      background-image: url("../images/Snow/obstacle1.png"); }
+    .container.snow .row #zoo .grid .row .tile.obstacle-2 {
+      background-image: url("../images/Snow/obstacle2.png"); }
+    .container.snow .row #zoo .grid .row .tile.obstacle-3 {
+      background-image: url("../images/Snow/obstacle3.png"); }
+  .container.snow .row #zoo .grid .row .tile:nth-child(1) {
+    background-image: url("../images/Snow/border/left.png"); }
+  .container.snow .row #zoo .grid .row .tile:last-child {
+    background-image: url("../images/Snow/border/right.png"); }
+  .container.snow .row #zoo .grid .row:nth-child(1) .tile {
+    background-image: url("../images/Snow/border/top.png"); }
+  .container.snow .row #zoo .grid .row:nth-child(1) .tile:nth-child(1) {
+    background-image: url("../images/Snow/border/top_left.png"); }
+  .container.snow .row #zoo .grid .row:nth-child(1) .tile:last-child {
+    background-image: url("../images/Snow/border/top_right.png"); }
+  .container.snow .row #zoo .grid .row:last-child .tile {
+    background-image: url("../images/Snow/border/bottom.png"); }
+  .container.snow .row #zoo .grid .row:last-child .tile:nth-child(1) {
+    background-image: url("../images/Snow/border/bottom_left.png"); }
+  .container.snow .row #zoo .grid .row:last-child .tile:last-child {
+    background-image: url("../images/Snow/border/bottom_right.png"); }
 
 .container {
   height: 100%;

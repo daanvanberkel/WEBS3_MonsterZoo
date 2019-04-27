@@ -16,6 +16,19 @@ export class ZooController {
         zoo.loadGrid(await jsonGrid.json());
 
         this.mapView.drawMap(zoo);
+
+        // add map handles
+        document.querySelector('.main-header').addEventListener('click', e => {
+            if (e.target.dataset.map == undefined){
+                return;
+            }
+            
+            // TODO: LOAD MAP FROM API
+            let mainContainer = document.querySelector(".container");
+            mainContainer.classList.remove("forest", "desert", "snow");
+            mainContainer.classList.add(e.target.dataset.map);
+            
+        });
     }
 
     handleClick(tile) {
