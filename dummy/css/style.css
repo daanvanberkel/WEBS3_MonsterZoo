@@ -48,7 +48,8 @@ table {
     left: -15px;
     right: -15px;
     bottom: -15px;
-    border: 5px solid #7574BD; }
+    border: 5px solid #7574BD;
+    z-index: -1; }
   .side-box:after {
     content: "";
     position: absolute;
@@ -56,7 +57,8 @@ table {
     left: -20px;
     right: -20px;
     bottom: -20px;
-    border: 5px solid black; }
+    border: 5px solid black;
+    z-index: -1; }
 
 .container.forest {
   background-image: url("../images/Forest/background.png"); }
@@ -141,6 +143,14 @@ table {
     background-image: url("../images/Snow/border/bottom_left.png"); }
   .container.snow .row #zoo .grid .row:last-child .tile:last-child {
     background-image: url("../images/Snow/border/bottom_right.png"); }
+
+monster-configurator {
+  display: flex;
+  flex-flow: column; }
+  monster-configurator .monster-icon {
+    width: 100px;
+    margin: auto;
+    margin-bottom: 20px; }
 
 .container {
   height: 100%;

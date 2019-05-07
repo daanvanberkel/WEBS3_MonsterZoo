@@ -1,0 +1,10 @@
+monster-configurator {
+    display: flex;
+    flex-flow: column;
+
+    .monster-icon {
+        width: 100px;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+}

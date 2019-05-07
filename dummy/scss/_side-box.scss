@@ -14,6 +14,7 @@
         right: 0 - $first-border-size - $second-border-size;
         bottom: 0 - $first-border-size - $second-border-size;
         border: $second-border-size solid #7574BD;
+        z-index: -1;
     }
 
     &:after {
@@ -24,5 +25,6 @@
         right: 0 - $first-border-size - $second-border-size - $third-border-size;
         bottom: 0 - $first-border-size - $second-border-size - $third-border-size;
         border: $third-border-size solid black;
+        z-index: -1;
     }
 }
