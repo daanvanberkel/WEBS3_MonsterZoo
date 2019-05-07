@@ -3,6 +3,11 @@ import { StatisticsView } from "../views/statisticsView.js";
 import { Zoo } from "../models/zoo.js";
 
 export class ZooController {
+
+    /**
+     * Bind all views to the controller,
+     * adding eventhandlers to DOMElements
+     */
     constructor() {
         this.mapView = new MapView(this);
         this.statisticsView = new StatisticsView();
@@ -10,6 +15,12 @@ export class ZooController {
         this.addMapSwitchHandlers();
     }
 
+    
+    /**
+     * Load grid from grid.json
+     * 
+     * @param {String} gridName 
+     */
     async start(gridName) {
         const zoo = new Zoo();
         
@@ -30,12 +41,21 @@ export class ZooController {
         this.mainContainer.classList.add('fade-in');
     }
 
+
+    /**
+     * Trigger: When user clicks on a tile
+     * @param {Tile} tile 
+     */
     handleClick(tile) {
         this.statisticsView.show(tile);
     }
 
+    /**
+     * Add Eventhanders to map switch buttons
+     * with animations
+     */
     async addMapSwitchHandlers(){
-
+        
         document.querySelector('.main-header').addEventListener('click', e => {
             if (e.target.dataset.map == undefined){
                 return;
