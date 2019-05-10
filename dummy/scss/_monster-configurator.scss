@@ -7,4 +7,61 @@ monster-configurator {
         margin: auto;
         margin-bottom: 20px;
     }
+
+    label {
+        font-family: 'Apple ][', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: -4px;
+        margin-bottom: 10px;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    }
+
+    select,
+    input {
+        display: block;
+        font-family: 'Apple ][';
+        padding: 5px 10px;
+        border-radius: 0;
+        border: 2px solid #676767;
+        width: 100%;
+        line-height: 2em;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: #B3B3B3;
+        text-transform: uppercase;
+        font-size: 16px;
+        color: #424242;
+        box-shadow: inset 1px 1px 2px 0px rgba(0,0,0,0.5);
+        margin-bottom: 20px;
+        letter-spacing: -4px;
+    }
+
+    select {
+        background-image: url('../images/arrow-down.svg');
+        background-repeat: no-repeat;
+        background-size: 25px;
+        background-position: right .7em top 50%, 0 0;
+    }
+
+    .btn-container {
+        display: flex;
+    }
+
+    button {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        font-family: 'Apple ][', sans-serif;
+        text-transform: uppercase;
+        padding: 10px;
+        border: 2px solid #676767;
+        background-color: #F5F5C8;
+        font-size: 16px;
+
+        &#configurator-save-btn {
+            width:100%;
+            margin-left: 10px;
+        }
+    }
 }
