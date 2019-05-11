@@ -6,6 +6,9 @@ export class Monster {
     armType;
     legs;
     eyes;
+    fur;
+    fly;
+    color;
 
     get typeName(){
         let type = this.type;

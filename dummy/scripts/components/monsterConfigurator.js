@@ -103,30 +103,145 @@ export class MonsterConfiguratorComponent extends HTMLElement {
           { type: ["water", "fire", "earth", "wind"] }
         ],
         value: 2,
-        name: "2"
+        name: "2 Eyes"
       },
       {
         enableIf: [
           { type: ["water", "fire"] }
         ],
         value: 4,
-        name: "4"
+        name: "4 Eyes"
       },
       {
         enableIf: [
           { type: ["water"] }
         ],
         value: 6,
-        name: "6"
+        name: "6 Eyes"
       },
       {
         enableIf: [
           { type: ["water"] }
         ],
         value: 8,
-        name: "8"
+        name: "8 Eyes"
       }
     ],
+    fur: [
+      {
+        enableIf: [
+          { type: ["water", "fire", "earth", "wind"] }
+        ],
+        value: "scales",
+        name: "Schubben"
+      },
+      {
+        enableIf: [
+          { type: ["water", "earth"] }
+        ],
+        value: "slime",
+        name: "Slijm"
+      },
+      {
+        enableIf: [
+          { type: ["fire", "wind"] }
+        ],
+        value: "feathers",
+        name: "Veren"
+      },
+      {
+        enableIf: [
+          { type: ["earth", "wind"] }
+        ],
+        value: "hair",
+        name: "Haar"
+      }
+    ],
+    fly: [
+      {
+        enableIf: [
+          { type: ["water", "earth", "fire"] },
+        ],
+        value: false,
+        name: "Nee"
+      },
+      {
+        enableIf: [
+          { type: ["wind"] },
+          { type: ["fire"], fur : ['feathers'] }
+        ],
+        value: true,
+        name: "Ja"
+      }
+    ],
+    swim: [
+      {
+        enableIf: [
+          { type: ["fire", "earth", "wind"] }
+        ],
+        value: false,
+        name: "Nee"
+      },
+      {
+        enableIf: [
+          { type: ["water"] },
+          { type: ["wind"], fur : ['scales'] }
+        ],
+        value: true,
+        name: "Ja"
+      }
+    ],
+    color: [
+      {
+        enableIf: [
+          { type: ["water", "wind"] },
+        ],
+        value: "blue",
+        name: "Blauw"
+      },
+      {
+        enableIf: [
+          { type: ["water", "fire"] },
+        ],
+        value: "red",
+        name: "Rood"
+      },
+      {
+        enableIf: [
+          { type: ["water"] },
+        ],
+        value: "green",
+        name: "Groen"
+      },
+      {
+        enableIf: [
+          { type: ["fire", "earth"] },
+        ],
+        value: "orange",
+        name: "Oranje"
+      },
+      {
+        enableIf: [
+          { type: ["fire"] },
+        ],
+        value: "braun",
+        name: "Bruin"
+      },
+      {
+        enableIf: [
+          { type: ["earth", "wind"] },
+        ],
+        value: "purple",
+        name: "Paars"
+      },
+      {
+        enableIf: [
+          { type: ["earth", "wind"] },
+        ],
+        value: "white",
+        name: "Wit"
+      }
+    ]
   };
 
   /* FIELD ELEMENTS */
@@ -137,7 +252,11 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     arms: null,
     armsType: null,
     legs: null,
-    eyes: null
+    eyes: null,
+    fur: null,
+    fly: null,
+    swim: null,
+    color: null
   };
 
   connectedCallback() {
@@ -146,6 +265,10 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     this.monster.armType = "tentacle";
     this.monster.legs = 2;
     this.monster.eyes = 2;
+    this.monster.fur = 'scales';
+    this.monster.fly = false;
+    this.monster.swim = true;
+    this.monster.color = 'blue';
 
     this.render();
   }
@@ -184,6 +307,10 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     this.setArmsTypeField();
     this.setLegsField();
     this.setEyesField();
+    this.setFurField();
+    this.setFlyField();
+    this.setSwimField();
+    this.setColorField();
 
     // set all options of the selects
     this.setSelectOptions();
@@ -274,7 +401,49 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     this.fieldElements["eyes"] = eyesField;
   }
 
-  
+  setFurField() {
+    const furField = this.createSelectField("fur");
+
+    furField.addEventListener("change", e => {
+      this.monster.fur = e.target.options[e.target.selectedIndex].value;
+      this.setSelectOptions();
+    });
+
+    this.fieldElements["fur"] = furField;
+  }
+
+  setFlyField() {
+    const flyField = this.createSelectField("fly");
+
+    flyField.addEventListener("change", e => {
+      this.monster.fly = e.target.options[e.target.selectedIndex].value;
+      this.setSelectOptions();
+    });
+
+    this.fieldElements["fly"] = flyField;
+  }
+
+  setSwimField(){
+    const swimField = this.createSelectField("swim");
+
+    swimField.addEventListener("change", e => {
+      this.monster.swim = e.target.options[e.target.selectedIndex].value;
+      this.setSelectOptions();
+    });
+
+    this.fieldElements["swim"] = swimField;
+  }
+
+  setColorField(){
+    const colorField = this.createSelectField("color");
+
+    colorField.addEventListener("change", e => {
+      this.monster.color = e.target.options[e.target.selectedIndex].value;
+      this.setSelectOptions();
+    });
+
+    this.fieldElements["color"] = colorField;
+  }
 
   /**
    * Add options to a select element
@@ -299,10 +468,6 @@ export class MonsterConfiguratorComponent extends HTMLElement {
 
       // loop trough all the options
       for (let option of options) {
-        // skip option if not valid props
-        if (!option.value || !option.name) {
-          continue;
-        }
 
         // check if this option needs to be filtered
         if (option.enableIf != undefined) {
