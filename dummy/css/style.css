@@ -36,8 +36,8 @@ table {
   border-spacing: 0; }
 
 @font-face {
-  font-family: 'Apple ][';
-  src: local("Apple ]["), local("Apple"), url("../fonts/Apple.woff2") format("woff2"), url("../fonts/Apple.woff") format("woff");
+  font-family: pixel;
+  src: URL("../fonts/Pokemon Classic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 
@@ -158,15 +158,15 @@ monster-configurator {
     margin: auto;
     margin-bottom: 20px; }
   monster-configurator label {
-    font-family: 'Apple ][', sans-serif;
+    font-family: pixel;
     text-transform: uppercase;
-    letter-spacing: -4px;
     margin-bottom: 10px;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); }
+    text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
+    font-size: 10px; }
   monster-configurator select,
   monster-configurator input {
     display: block;
-    font-family: 'Apple ][';
+    font-family: pixel;
     padding: 5px 10px;
     border-radius: 0;
     border: 2px solid #676767;
@@ -180,8 +180,7 @@ monster-configurator {
     font-size: 16px;
     color: #424242;
     box-shadow: inset 1px 1px 2px 0px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
-    letter-spacing: -4px; }
+    margin-bottom: 20px; }
   monster-configurator select {
     background-image: url("../images/arrow-down.svg");
     background-repeat: no-repeat;
@@ -193,7 +192,7 @@ monster-configurator {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    font-family: 'Apple ][', sans-serif;
+    font-family: pixel;
     text-transform: uppercase;
     padding: 10px;
     border: 2px solid #676767;

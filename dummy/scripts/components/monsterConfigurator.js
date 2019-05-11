@@ -1,151 +1,389 @@
+import { Monster } from "./../models/monster.js";
+
 export class MonsterConfiguratorComponent extends HTMLElement {
-    connectedCallback() {
-        this.render();
+  /* MONSTER VALUES */
+  monster = new Monster();
+
+  options = {
+    type: [
+      {
+        value: "water",
+        name: "Water"
+      },
+      {
+        value: "fire",
+        name: "Vuur"
+      },
+      {
+        value: "earth",
+        name: "Aarde"
+      },
+      {
+        value: "wind",
+        name: "Wind"
+      }
+    ],
+    arms: [
+      {
+        value: 2,
+        name: "2 Armen"
+      },
+      {
+        enableIf: [{ type: ["water", "fire"] }],
+        value: 4,
+        name: "4 Armen"
+      },
+      {
+        enableIf: [{ type: ["water", "fire"] }],
+        value: 6,
+        name: "6 Armen"
+      },
+      {
+        enableIf: [{ type: ["water"] }],
+        value: 8,
+        name: "8 Armen"
+      }
+    ],
+    armsType: [
+      {
+        enableIf: [{ type: ["water", "fire"] }],
+        value: "tentacle",
+        name: "Tentakels"
+      },
+      {
+        enableIf: [{ type: ["water"] }],
+        value: "fins",
+        name: "Vinnen"
+      },
+      {
+        enableIf: [{ type: ["fire", "earth"] }],
+        value: "claws",
+        name: "Klauwen"
+      },
+      {
+        enableIf: [{ type: ["fire", "wind"] }],
+        value: "claw-wings",
+        name: "Klauw Vleugels"
+      },
+      {
+        enableIf: [{ type: ["wind"] }],
+        value: "wings",
+        name: "Vleugels"
+      }
+    ],
+    legs: [
+      {
+        enableIf: [{ type: ["water"], arms: [2, 4] }, { type: ["wind"] }],
+        value: 0,
+        name: "0 Legs"
+      },
+      {
+        enableIf: [
+          { type: ["water"], arms: [2, 4] },
+          { type: ["fire"], arms: [2] },
+          { type: ["earth", "wind"] },
+        ],
+        value: 2,
+        name: "2 Legs"
+      },
+      {
+        enableIf: [{ type: ["water"], arms: [2, 4] }, { type: ["earth"] }],
+        value: 4,
+        name: "4 Legs"
+      },
+      {
+        enableIf: [{ type: ["earth"] }],
+        value: 6,
+        name: "6 Legs"
+      }
+    ],
+    eyes: [
+      {
+        enableIf: [
+          { type: ["water", "fire", "earth", "wind"] }
+        ],
+        value: 2,
+        name: "2"
+      },
+      {
+        enableIf: [
+          { type: ["water", "fire"] }
+        ],
+        value: 4,
+        name: "4"
+      },
+      {
+        enableIf: [
+          { type: ["water"] }
+        ],
+        value: 6,
+        name: "6"
+      },
+      {
+        enableIf: [
+          { type: ["water"] }
+        ],
+        value: 8,
+        name: "8"
+      }
+    ],
+  };
+
+  /* FIELD ELEMENTS */
+  fieldElements = {
+    img: null,
+    name: null,
+    type: null,
+    arms: null,
+    armsType: null,
+    legs: null,
+    eyes: null
+  };
+
+  connectedCallback() {
+    this.monster.type = "water";
+    this.monster.arms = 2;
+    this.monster.armType = "tentacle";
+    this.monster.legs = 2;
+    this.monster.eyes = 2;
+
+    this.render();
+  }
+
+  render() {
+    this.setMonsterImageField();
+    this.renderFields();
+  }
+
+  /**
+   * Render the monster icon
+   */
+  setMonsterImageField() {
+    this.fieldElements["img"] = document.createElement("img");
+    this.fieldElements["img"].classList.add("monster-icon");
+    this.setMonsterImage();
+  }
+
+  /**
+   * Render new monster image based from type
+   */
+  setMonsterImage() {
+    const imgUrl = `/images/Monsters/${this.monster.typeName}/${
+      this.monster.imgFile
+    }`;
+    this.fieldElements["img"].src = imgUrl;
+  }
+
+  /**
+   * Render all the fields with event handlers
+   */
+  renderFields() {
+    this.setNameField();
+    this.setTypeField();
+    this.setArmsField();
+    this.setArmsTypeField();
+    this.setLegsField();
+    this.setEyesField();
+
+    // set all options of the selects
+    this.setSelectOptions();
+
+    // add all fields to the monster configurator
+    for (var fieldName in this.fieldElements) {
+      const field = this.fieldElements[fieldName];
+
+      if (field == null) {
+        continue;
+      }
+
+      if (field.name != "") {
+        const label = document.createElement("label");
+        label.innerHTML = field.name;
+        this.appendChild(label);
+      }
+
+      this.appendChild(field);
     }
 
-    render() {
-        this.renderMonster();
-        this.renderFields();
-    }
+    this.appendChild(this.createButtons());
+  }
 
-    renderMonster() {
-        const image = document.createElement('img');
-        image.classList.add('monster-icon');
-        image.src = "/images/Monsters/Fire/Fire1.png";
+  setTypeField() {
+    const selectField = this.createSelectField("type", this.options["type"]);
 
-        this.appendChild(image);
-    }
+    selectField.addEventListener("change", e => {
+      this.monster.type = e.target.options[e.target.selectedIndex].value;
+      this.setSelectOptions();
+      this.setMonsterImage();
+    });
 
-    renderFields() {
-        this.appendChild(this.createLabel("Type:"));
-        this.appendChild(this.createTypeField());
+    this.fieldElements["type"] = selectField;
+  }
 
-        this.appendChild(this.createLabel("Naam:"));
-        this.appendChild(this.createNameField());
+  setNameField() {
+    const nameField = this.createTextField("name", "Naam");
 
-        this.appendChild(this.createLabel("Armen:"));
-        this.appendChild(this.createArmsField());
+    nameField.addEventListener("keyup", e => {
+      this.monsterName = e.target.value;
+    });
 
-        this.appendChild(this.createLabel("Benen:"));
-        this.appendChild(this.createLegsField());
+    this.fieldElements["name"] = nameField;
+  }
 
-        this.appendChild(this.createLabel("Ogen:"));
-        this.appendChild(this.createEyesField());
+  setArmsField() {
+    const armsField = this.createSelectField("arms");
 
-        this.appendChild(this.createButtons());
-    }
+    armsField.addEventListener("change", e => {
+      this.monster.arms = e.target.options[e.target.selectedIndex].value;
+      this.setSelectOptions();
+    });
 
-    createLabel(name) {
-        const label = document.createElement('label');
-        label.innerHTML = name;
+    this.fieldElements["arms"] = armsField;
+  }
 
-        return label;
-    }
+  setArmsTypeField() {
+    const armsTypeField = this.createSelectField("armsType");
 
-    createSelectField(name, options) {
-        const select = document.createElement('select');
-        select.setAttribute('name', name);
+    armsTypeField.addEventListener("change", e => {
+      this.monster.armsType = e.target.options[e.target.selectedIndex].value;
+      this.setSelectOptions();
+    });
 
-        for(let option of options) {
-            if (!option.name || !option.title) continue;
+    this.fieldElements["armsType"] = armsTypeField;
+  }
 
-            const el = document.createElement('option');
-            el.setAttribute('name', option.name);
-            el.innerHTML = option.title;
+  setLegsField() {
+    const legsField = this.createSelectField("legs");
 
-            select.appendChild(el);
+    legsField.addEventListener("change", e => {
+      this.monster.legs = e.target.options[e.target.selectedIndex].value;
+      this.setSelectOptions();
+    });
+
+    this.fieldElements["legs"] = legsField;
+  }
+
+  setEyesField() {
+    const eyesField = this.createSelectField("eyes");
+
+    eyesField.addEventListener("change", e => {
+      this.monster.eyes = e.target.options[e.target.selectedIndex].value;
+      this.setSelectOptions();
+    });
+
+    this.fieldElements["eyes"] = eyesField;
+  }
+
+  
+
+  /**
+   * Add options to a select element
+   *
+   * @param {HTMLElement} select
+   * @param {Array} options
+   */
+  setSelectOptions() {
+    for (let elementName in this.options) {
+      // get select with all options
+      let select = this.fieldElements[elementName];
+      let options = this.options[elementName];
+
+      const prevIndex = select.selectedIndex;
+
+      // remove all prev option from select
+      if (select.options != undefined) {
+        for (var i = select.options.length - 1; i >= 0; i--) {
+          select.remove(i);
+        }
+      }
+
+      // loop trough all the options
+      for (let option of options) {
+        // skip option if not valid props
+        if (!option.value || !option.name) {
+          continue;
         }
 
-        return select;
-    }
+        // check if this option needs to be filtered
+        if (option.enableIf != undefined) {
+          let addOption = false;
 
-    createTypeField() {
-        const options = [
-            {
-                name: 'water',
-                title: 'Water'
-            },
-            {
-                name: 'fire',
-                title: 'Vuur'
-            },
-            {
-                name: 'earth',
-                title: 'Aarde'
-            },
-            {
-                name: 'wind',
-                title: 'Wind'
+          // loop trough all the criteria sets
+          for (var criteriaIndex in option.enableIf) {
+            const criteria = option.enableIf[criteriaIndex];
+
+            // check if all the attr matches with the option
+            let allMatches = true;
+            for (var propName in criteria) {
+              if (!criteria[propName].includes(this.monster[propName])) {
+                allMatches = false;
+              }
             }
-        ];
 
-        return this.createSelectField('type', options);
-    }
+            addOption = allMatches;
 
-    createArmsField() {
-        const options = [];
+            if (addOption == true) {
+              break;
+            }
+          }
 
-        // TODO: Baseren op basis van geselecteerd monster type
-        for(let i = 0; i < 8; i++) {
-            options.push({
-                name: `arms-${i + 1}`,
-                title: `${i + 1} armen`
-            });
+          if (addOption == false) {
+            continue;
+          }
         }
 
-        return this.createSelectField('arms', options);
+        // add option to select
+        const el = document.createElement("option");
+        el.setAttribute("value", option.value);
+        el.innerHTML = option.name;
+        select.appendChild(el);
+      }
+
+      // check if index is still avalible with new options
+      if (prevIndex > -1 && prevIndex < select.length) {
+        select.selectedIndex = prevIndex;
+      }
     }
+  }
 
-    createLegsField() {
-        const options = [];
+  /**
+   * Create select HTMLElement
+   *
+   * @param {String} name
+   * @param {Array} options
+   */
+  createSelectField(name) {
+    const select = document.createElement("select");
+    select.setAttribute("name", name);
+    return select;
+  }
 
-        // TODO: Baseren op basis van geselecteerd monster type
-        for(let i = 0; i < 3; i++) {
-            options.push({
-                name: `legs-${i + 1}`,
-                title: `${i + 1} benen`
-            });
-        }
+  /**
+   * Create HTMLElement of a text input
+   * @param {String} name
+   * @param {String} placeholder
+   */
+  createTextField(name, placeholder) {
+    const textField = document.createElement("input");
+    textField.setAttribute("name", name);
+    textField.setAttribute("placeholder", placeholder);
+    return textField;
+  }
 
-        return this.createSelectField('legs', options);
-    }
+  createButtons() {
+    const container = document.createElement("div");
+    container.classList.add("btn-container");
 
-    createEyesField() {
-        const options = [];
+    const cancelBtn = document.createElement("button");
+    cancelBtn.innerHTML = "X";
+    cancelBtn.setAttribute("id", "configurator-cancel-btn");
+    container.appendChild(cancelBtn);
 
-        // TODO: Baseren op basis van geselecteerd monster type
-        for(let i = 0; i < 2; i++) {
-            options.push({
-                name: `eyes-${i + 1}`,
-                title: `${i + 1} ogen`
-            });
-        }
+    const saveBtn = document.createElement("button");
+    saveBtn.innerHTML = "Opslaan";
+    saveBtn.setAttribute("id", "configurator-save-btn");
+    container.appendChild(saveBtn);
 
-        return this.createSelectField('eyes', options);
-    }
-
-    createNameField() {
-        const field = document.createElement('input');
-        field.setAttribute('name', 'name');
-        field.setAttribute('placeholder', 'Naam');
-
-        return field;
-    }
-
-    createButtons() {
-        const container = document.createElement('div');
-        container.classList.add('btn-container');
-
-        const cancelBtn = document.createElement('button');
-        cancelBtn.innerHTML = 'X';
-        cancelBtn.setAttribute('id', 'configurator-cancel-btn');
-        container.appendChild(cancelBtn);
-
-        const saveBtn = document.createElement('button');
-        saveBtn.innerHTML = "Opslaan";
-        saveBtn.setAttribute('id', 'configurator-save-btn');
-        container.appendChild(saveBtn);
-
-        return container;
-    }
+    return container;
+  }
 }
