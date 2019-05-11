@@ -73,7 +73,9 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     ],
     legs: [
       {
-        enableIf: [{ type: ["water"], arms: [2, 4] }, { type: ["wind"] }],
+        enableIf: [
+          { type: ["water", "wind", "fire"] }, 
+        ],
         value: 0,
         name: "0 Legs"
       },
@@ -361,7 +363,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     const armsField = this.createSelectField("arms");
 
     armsField.addEventListener("change", e => {
-      this.monster.arms = e.target.options[e.target.selectedIndex].value;
+      this.monster.arms = parseInt(e.target.options[e.target.selectedIndex].value);
       this.setSelectOptions();
     });
 
@@ -383,7 +385,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     const legsField = this.createSelectField("legs");
 
     legsField.addEventListener("change", e => {
-      this.monster.legs = e.target.options[e.target.selectedIndex].value;
+      this.monster.legs = parseInt(e.target.options[e.target.selectedIndex].value);
       this.setSelectOptions();
     });
 
@@ -394,7 +396,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     const eyesField = this.createSelectField("eyes");
 
     eyesField.addEventListener("change", e => {
-      this.monster.eyes = e.target.options[e.target.selectedIndex].value;
+      this.monster.eyes = parseInt(e.target.options[e.target.selectedIndex].value);
       this.setSelectOptions();
     });
 
@@ -473,19 +475,21 @@ export class MonsterConfiguratorComponent extends HTMLElement {
         if (option.enableIf != undefined) {
           let addOption = false;
 
+          
+
           // loop trough all the criteria sets
           for (var criteriaIndex in option.enableIf) {
             const criteria = option.enableIf[criteriaIndex];
 
             // check if all the attr matches with the option
-            let allMatches = true;
+            let allPropsMatches = true;
             for (var propName in criteria) {
               if (!criteria[propName].includes(this.monster[propName])) {
-                allMatches = false;
+                allPropsMatches = false;
               }
             }
 
-            addOption = allMatches;
+            addOption = allPropsMatches;
 
             if (addOption == true) {
               break;
