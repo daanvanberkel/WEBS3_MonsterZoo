@@ -565,8 +565,4 @@ export class MonsterConfiguratorComponent extends HTMLElement {
 
     return container;
   }
-
-  emitMonsterCreatedEvent() {
-    
-  }
 }
