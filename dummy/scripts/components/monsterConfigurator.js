@@ -553,6 +553,20 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     saveBtn.setAttribute("id", "configurator-save-btn");
     container.appendChild(saveBtn);
 
+    const component = this;
+    saveBtn.addEventListener('click', () => {
+      const event = new CustomEvent('monsterCreated', {
+        detail: component.monster
+      });
+  
+      component.dispatchEvent(event);
+    });
+
+
     return container;
+  }
+
+  emitMonsterCreatedEvent() {
+    
   }
 }
