@@ -5,6 +5,8 @@
     // border-left: 0;
     padding: 20px;
     margin: $first-border-size + $second-border-size + $third-border-size;
+    max-height: 100%;
+    overflow-y: auto;
 
     &:before {
         content: "";

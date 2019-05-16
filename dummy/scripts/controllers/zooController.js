@@ -12,7 +12,12 @@ export class ZooController {
         this.mapView = new MapView(this);
         this.statisticsView = new StatisticsView();
         this.mainContainer = document.querySelector(".container");
+        this.monsterConfigurator = document.querySelector('monster-configurator');
         this.addMapSwitchHandlers();
+
+        this.monsterConfigurator.addEventListener('monsterCreated', e => {
+            console.log(e);
+        });
     }
 
     

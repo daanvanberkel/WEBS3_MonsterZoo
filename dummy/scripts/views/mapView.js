@@ -1,5 +1,3 @@
-import { TileView } from "./tileView.js";
-
 export class MapView {
 
     /**
@@ -37,13 +35,14 @@ export class MapView {
             for(let tile of row) {
 
                 // create html of the tile
-                let htmlTile = new TileView(tile).drawTile();
+                let t = document.createElement('tile-component');
+                t.tile = tile;
 
-                htmlTile.addEventListener('click', e => {
+                t.addEventListener('click', e => {
                     this.controller.handleClick(tile);
                 });
 
-                htmlRow.appendChild(htmlTile);
+                htmlRow.appendChild(t);
             }
 
             grid.appendChild(htmlRow);
