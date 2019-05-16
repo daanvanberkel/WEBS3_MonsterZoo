@@ -262,6 +262,8 @@ export class MonsterConfiguratorComponent extends HTMLElement {
   };
 
   connectedCallback() {
+
+    // create default water monster
     this.monster.type = "water";
     this.monster.arms = 2;
     this.monster.armType = "tentacle";
@@ -275,10 +277,12 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     this.render();
   }
 
+
   render() {
     this.setMonsterImageField();
     this.renderFields();
   }
+
 
   /**
    * Render the monster icon
@@ -288,6 +292,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     this.fieldElements["img"].classList.add("monster-icon");
     this.setMonsterImage();
   }
+
 
   /**
    * Render new monster image based from type
@@ -299,31 +304,31 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     this.fieldElements["img"].src = imgUrl;
   }
 
+
   /**
    * Render all the fields with event handlers
    */
   renderFields() {
     this.setNameField();
     this.setTypeField();
-    this.setArmsField();
-    this.setArmsTypeField();
-    this.setLegsField();
-    this.setEyesField();
-    this.setFurField();
-    this.setFlyField();
-    this.setSwimField();
-    this.setColorField();
+    this.setSelectField('arms', (val) => parseInt(val));
+    this.setSelectField('armsType');
+    this.setSelectField('legs', (val) => parseInt(val));
+    this.setSelectField('eyes', (val) => parseInt(val));
+    this.setSelectField('fur');
+    this.setSelectField('fly');
+    this.setSelectField('swim');
+    this.setSelectField('color');
 
     // set all options of the selects
     this.setSelectOptions();
 
     // add all fields to the monster configurator
     for (var fieldName in this.fieldElements) {
+      
       const field = this.fieldElements[fieldName];
 
-      if (field == null) {
-        continue;
-      }
+      if (field == null) { continue; }
 
       if (field.name != "") {
         const label = document.createElement("label");
@@ -335,6 +340,16 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     }
 
     this.appendChild(this.createButtons());
+  }
+
+  setNameField() {
+    const nameField = this.createTextField("name", "Naam");
+
+    nameField.addEventListener("keyup", e => {
+      this.monsterName = e.target.value;
+    });
+
+    this.fieldElements["name"] = nameField;
   }
 
   setTypeField() {
@@ -349,111 +364,28 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     this.fieldElements["type"] = selectField;
   }
 
-  setNameField() {
-    const nameField = this.createTextField("name", "Naam");
+  setSelectField(name, valConverter){
+    const field = this.createSelectField(name);
 
-    nameField.addEventListener("keyup", e => {
-      this.monsterName = e.target.value;
-    });
-
-    this.fieldElements["name"] = nameField;
-  }
-
-  setArmsField() {
-    const armsField = this.createSelectField("arms");
-
-    armsField.addEventListener("change", e => {
-      this.monster.arms = parseInt(e.target.options[e.target.selectedIndex].value);
+    field.addEventListener("change", e => {
+      let value = e.target.options[e.target.selectedIndex].value;
+      if (valConverter != undefined){ value = valConverter(value); }
+      this.monster[name] = value;
       this.setSelectOptions();
     });
 
-    this.fieldElements["arms"] = armsField;
+    this.fieldElements[name] = field;
   }
 
-  setArmsTypeField() {
-    const armsTypeField = this.createSelectField("armsType");
-
-    armsTypeField.addEventListener("change", e => {
-      this.monster.armsType = e.target.options[e.target.selectedIndex].value;
-      this.setSelectOptions();
-    });
-
-    this.fieldElements["armsType"] = armsTypeField;
-  }
-
-  setLegsField() {
-    const legsField = this.createSelectField("legs");
-
-    legsField.addEventListener("change", e => {
-      this.monster.legs = parseInt(e.target.options[e.target.selectedIndex].value);
-      this.setSelectOptions();
-    });
-
-    this.fieldElements["legs"] = legsField;
-  }
-
-  setEyesField() {
-    const eyesField = this.createSelectField("eyes");
-
-    eyesField.addEventListener("change", e => {
-      this.monster.eyes = parseInt(e.target.options[e.target.selectedIndex].value);
-      this.setSelectOptions();
-    });
-
-    this.fieldElements["eyes"] = eyesField;
-  }
-
-  setFurField() {
-    const furField = this.createSelectField("fur");
-
-    furField.addEventListener("change", e => {
-      this.monster.fur = e.target.options[e.target.selectedIndex].value;
-      this.setSelectOptions();
-    });
-
-    this.fieldElements["fur"] = furField;
-  }
-
-  setFlyField() {
-    const flyField = this.createSelectField("fly");
-
-    flyField.addEventListener("change", e => {
-      this.monster.fly = e.target.options[e.target.selectedIndex].value;
-      this.setSelectOptions();
-    });
-
-    this.fieldElements["fly"] = flyField;
-  }
-
-  setSwimField(){
-    const swimField = this.createSelectField("swim");
-
-    swimField.addEventListener("change", e => {
-      this.monster.swim = e.target.options[e.target.selectedIndex].value;
-      this.setSelectOptions();
-    });
-
-    this.fieldElements["swim"] = swimField;
-  }
-
-  setColorField(){
-    const colorField = this.createSelectField("color");
-
-    colorField.addEventListener("change", e => {
-      this.monster.color = e.target.options[e.target.selectedIndex].value;
-      this.setSelectOptions();
-    });
-
-    this.fieldElements["color"] = colorField;
-  }
 
   /**
-   * Add options to a select element
+   * Add options to a all selected elements
    *
    * @param {HTMLElement} select
    * @param {Array} options
    */
   setSelectOptions() {
+
     for (let elementName in this.options) {
       // get select with all options
       let select = this.fieldElements[elementName];
@@ -474,8 +406,6 @@ export class MonsterConfiguratorComponent extends HTMLElement {
         // check if this option needs to be filtered
         if (option.enableIf != undefined) {
           let addOption = false;
-
-          
 
           // loop trough all the criteria sets
           for (var criteriaIndex in option.enableIf) {
@@ -539,6 +469,10 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     return textField;
   }
 
+
+  /**
+   * Add the cancel and add button to the DOM
+   */
   createButtons() {
     const container = document.createElement("div");
     container.classList.add("btn-container");
@@ -551,6 +485,11 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     const saveBtn = document.createElement("button");
     saveBtn.innerHTML = "Opslaan";
     saveBtn.setAttribute("id", "configurator-save-btn");
+
+    saveBtn.addEventListener('click', event => {
+      console.log("save click", this.monster);
+    });
+
     container.appendChild(saveBtn);
 
     return container;
