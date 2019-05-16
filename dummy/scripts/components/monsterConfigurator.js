@@ -298,9 +298,8 @@ export class MonsterConfiguratorComponent extends HTMLElement {
    * Render new monster image based from type
    */
   setMonsterImage() {
-    const imgUrl = `/images/Monsters/${this.monster.typeName}/${
-      this.monster.imgFile
-    }`;
+    this.monster.imageIndex = Math.floor(Math.random() * 4) + 1;
+    const imgUrl = `/images/Monsters/${this.monster.typeName}/${this.monster.imgFile}`;
     this.fieldElements["img"].src = imgUrl;
   }
 
@@ -486,19 +485,14 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     saveBtn.innerHTML = "Opslaan";
     saveBtn.setAttribute("id", "configurator-save-btn");
 
-    saveBtn.addEventListener('click', event => {
-      console.log("save click", this.monster);
-    });
-
     container.appendChild(saveBtn);
 
-    const component = this;
     saveBtn.addEventListener('click', () => {
       const event = new CustomEvent('monsterCreated', {
-        detail: component.monster
+        detail: this.monster
       });
   
-      component.dispatchEvent(event);
+      this.dispatchEvent(event);
     });
 
 

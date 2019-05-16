@@ -15,9 +15,8 @@ export class ZooController {
         this.monsterConfigurator = document.querySelector('monster-configurator');
         this.addMapSwitchHandlers();
 
-        this.monsterConfigurator.addEventListener('monsterCreated', e => {
-            console.log(e);
-        });
+        // pass monster to mapView if user clicks on 'Save'
+        this.monsterConfigurator.addEventListener('monsterCreated', e => this.mapView.addMonster(e.detail));
     }
 
     

@@ -19,10 +19,6 @@ export class Monster {
     }
 
     get imgFile(){
-        let imageIndex = this.imageIndex;
-        if (imageIndex == null){
-            imageIndex = Math.floor(Math.random() * 4) + 1;
-        }
-        return `${this.typeName}${imageIndex}.png`;
+        return `${this.typeName}${this.imageIndex}.png`;
     }
 }

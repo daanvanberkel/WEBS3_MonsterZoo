@@ -50,4 +50,21 @@ export class MapView {
 
         this.element.appendChild(grid);
     }
+
+    addMonster(monster){
+
+        // find free tile
+        let tiles = Array.from(this.element.querySelectorAll("tile-component"));
+
+        let freeTiles = tiles.filter(tile => tile.classList.contains('free-tile'));
+
+        if (freeTiles.length > 0){
+            let freeTile =  freeTiles[0]
+            freeTile.tile.monster = monster;
+            freeTile.render();
+        }
+
+    } 
+
+    // TODO: Create monster render function
 }
