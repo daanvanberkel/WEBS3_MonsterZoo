@@ -1,6 +1,6 @@
-import { MapView } from "../views/mapView.js";
 import { StatisticsView } from "../views/statisticsView.js";
 import { Zoo } from "../models/zoo.js";
+import { MapController } from "./mapController.js";
 
 export class ZooController {
 
@@ -9,14 +9,13 @@ export class ZooController {
      * adding eventhandlers to DOMElements
      */
     constructor() {
-        this.mapView = new MapView(this);
+        this.mapController = new MapController(this);
         this.statisticsView = new StatisticsView();
         this.mainContainer = document.querySelector(".container");
         this.monsterConfigurator = document.querySelector('monster-configurator');
-        this.addMapSwitchHandlers();
 
-        // pass monster to mapView if user clicks on 'Save'
-        this.monsterConfigurator.addEventListener('monsterCreated', e => this.mapView.addMonster(e.detail));
+        // pass monster to mapController if user clicks on 'Save'
+        this.monsterConfigurator.addEventListener('monsterCreated', e => this.mapController.addMonster(e.detail));
     }
 
     
@@ -39,7 +38,7 @@ export class ZooController {
 
         zoo.loadGrid(jsonGrid);
 
-        this.mapView.drawMap(zoo);
+        this.mapController.drawMap(zoo);
 
         this.mainContainer.classList.remove('fade-out');
         this.mainContainer.classList.add('fade-in');
@@ -52,39 +51,5 @@ export class ZooController {
      */
     handleClick(tile) {
         this.statisticsView.show(tile);
-    }
-
-    /**
-     * Add Eventhanders to map switch buttons
-     * with animations
-     */
-    async addMapSwitchHandlers(){
-        
-        document.querySelector('.main-header').addEventListener('click', e => {
-            if (e.target.dataset.map == undefined){
-                return;
-            }
-            
-            // TODO: LOAD MAP FROM API
-
-            // fade map out
-            this.mainContainer.classList.remove('fade-in');
-            this.mainContainer.classList.add('fade-out');
-
-            // wait for fade out
-            setTimeout(() => {
-                
-                this.mainContainer.classList.remove("forest", "desert", "snow");
-                this.mainContainer.classList.add(e.target.dataset.map);
-
-                // disable clicked button
-                let buttons = document.querySelectorAll('.map_button');
-                buttons.forEach(button => button.disabled = false);
-                e.target.disabled = true;
-
-                this.start(e.target.dataset.map);
-            }, 500);
-            
-        });
     }
 }
