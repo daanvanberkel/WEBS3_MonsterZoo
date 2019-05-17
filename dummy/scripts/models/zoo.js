@@ -29,20 +29,19 @@ export class Zoo {
         this.city = json['reference city'];
 
         // loop trough grid rows
-        for(let jsonRow of json.grid) {
-            
-            let tileRow = []
-
-            // TODO: Check if monsters are saved in localstorage and place monsters in right cages
+        for(let [i, jsonRow] of json.grid.entries()) {
+            let tileRow = [];
             
             // add the column to the row
-            for(let jsonCol of jsonRow.Columns) {
-
+            for(let [j, jsonCol] of jsonRow.Columns.entries()) {
                 const tile = new Tile();
                 
                 // set obstacle tile if true
                 if (jsonCol == 1) {
                     tile.isObstacle = true;
+                } else if (localStorage.getItem(`${this.name}_${i}_${j}`)) {
+                    // Add monster to tile
+                    tile.monster = JSON.parse(localStorage.getItem(`${this.name}_${i}_${j}`));
                 }
 
                 tileRow.push(tile);
