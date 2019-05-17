@@ -1,7 +1,10 @@
 export class Tile {
     monster;
     isObstacle = false;
-    isBorderTile = false
+    isBorderTile = false;
+    row;
+    col;
+
 
     /**
      * Fill local properties from JSON Array

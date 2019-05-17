@@ -14,13 +14,16 @@ export class MapController {
         let freeTiles = tiles.filter(tile => tile.classList.contains('free-tile'));
 
         if (freeTiles.length > 0){
-            let freeTile =  freeTiles[0]
+            let freeTile =  freeTiles[0];
             freeTile.tile.monster = monster;
             freeTile.render();
+
+            localStorage.setItem(`${this.zoo.name}_${freeTile.tile.row}_${freeTile.tile.col}`, JSON.stringify(monster));
         }
     }
 
     drawMap(zoo) {
+        this.zoo = zoo;
         this.mapView.drawMap(zoo);
     }
 

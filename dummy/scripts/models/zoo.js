@@ -1,4 +1,5 @@
 import { Tile } from "./tile.js";
+import { Monster } from "./monster.js";
 
 export class Zoo {
     name = '';
@@ -34,14 +35,17 @@ export class Zoo {
             
             // add the column to the row
             for(let [j, jsonCol] of jsonRow.Columns.entries()) {
-                const tile = new Tile();
+                const tile = new Tile({
+                    row: i,
+                    col: j
+                });
                 
                 // set obstacle tile if true
                 if (jsonCol == 1) {
                     tile.isObstacle = true;
                 } else if (localStorage.getItem(`${this.name}_${i}_${j}`)) {
                     // Add monster to tile
-                    tile.monster = JSON.parse(localStorage.getItem(`${this.name}_${i}_${j}`));
+                    tile.monster = Object.assign(new Monster, JSON.parse(localStorage.getItem(`${this.name}_${i}_${j}`)));
                 }
 
                 tileRow.push(tile);
