@@ -286,3 +286,12 @@ monster-configurator {
             .container .row #zoo .grid .row .tile img {
               pointer-events: none;
               user-select: none; }
+            .container .row #zoo .grid .row .tile.hide-monster img {
+              display: none; }
+      .container .row #zoo.drag .dragImg {
+        display: block; }
+      .container .row #zoo .dragImg {
+        display: none;
+        pointer-events: none;
+        position: absolute;
+        user-select: none; }

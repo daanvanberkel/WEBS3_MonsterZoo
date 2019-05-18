@@ -1,9 +1,11 @@
 export class MapView {
     controller;
+    dragImg;
 
     constructor(controller) {
         this.controller = controller;
         this.element = document.querySelector('#zoo');
+
     }
 
     /**
@@ -32,7 +34,7 @@ export class MapView {
                 // create html of the tile
                 let t = document.createElement('tile-component');
                 t.tile = tile;
-                
+
                 t.addEventListener("mousedown", (e)=>{
                     this.controller.tileMouseDown(e.target);
                 });
@@ -48,5 +50,18 @@ export class MapView {
         }
 
         this.element.appendChild(grid);
+
+        // add draggable img
+        this.dragImg = document.createElement('img');
+        this.dragImg.src = '/images/Monsters/Water/Water1.png';
+        this.dragImg.classList.add('dragImg');
+        this.element.appendChild(this.dragImg);
+
+        this.element.addEventListener("mousemove", (e) => {
+            this.dragImg.style.top = e.clientY - this.dragImg.clientHeight / 2;
+            this.dragImg.style.left = e.clientX - this.dragImg.clientWidth / 2;
+        });
+
     }
+
 }

@@ -116,8 +116,29 @@ $third-border-size: 5px;
                             pointer-events: none;
                             user-select: none;
                         }
+
+                        &.hide-monster{
+                            img{
+                                display: none;
+                            }
+                        }
                     }
                 }
+
+                
+            }
+
+            &.drag{
+                .dragImg{
+                    display: block;
+                }
+            }
+
+            .dragImg{
+                display: none;
+                pointer-events: none;
+                position: absolute;
+                user-select: none;
             }
         }
     }

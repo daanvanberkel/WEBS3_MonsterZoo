@@ -108,13 +108,19 @@ export class MapController {
         if (tileComponent.tile.monster == null){return;}
 
         this.draggingTileComponent = tileComponent;
+        this.mapView.dragImg.src = `/images/Monsters/${tileComponent.tile.monster.typeName}/${tileComponent.tile.monster.imgFile}`;
+        this.mapView.element.classList.add('drag');
+        tileComponent.classList.add('hide-monster');
     }
 
     tileMouseUp(tileComponent){
-        
 
+        this.mapView.element.classList.remove('drag');
+        
         // cancel if no monster was dragged
         if (this.draggingTileComponent == null){ return; }
+
+        this.draggingTileComponent.classList.remove('hide-monster');
 
         // cancel if placed on invalid tile
         if (tileComponent.classList.contains('free-tile') == false){ 
