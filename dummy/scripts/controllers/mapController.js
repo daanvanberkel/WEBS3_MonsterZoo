@@ -144,7 +144,7 @@ export class MapController {
 
         
 
-        // TODO: Save tile to LocalStorage (line below not working)
+        // TODO: Remove old tile and add newone to LocalStore (line below not working)
         // ! this.monsterService.deleteMonster(this.mapName, this.draggingTileComponent.posX, this.draggingTileComponent.posY);
     }
 
