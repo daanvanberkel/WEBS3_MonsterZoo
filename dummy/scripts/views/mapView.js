@@ -5,7 +5,6 @@ export class MapView {
     constructor(controller) {
         this.controller = controller;
         this.element = document.querySelector('#zoo');
-
     }
 
     /**

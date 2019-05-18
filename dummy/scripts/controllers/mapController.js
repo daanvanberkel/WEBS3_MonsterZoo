@@ -100,7 +100,7 @@ export class MapController {
     }
 
     /**
-     * User Mousedown on Monster
+     * User Mousedown on tile
      */
     tileMouseDown(tileComponent){
 
@@ -113,6 +113,9 @@ export class MapController {
         tileComponent.classList.add('hide-monster');
     }
 
+    /**
+     * User MouseUp on tile
+     */
     tileMouseUp(tileComponent){
 
         this.mapView.element.classList.remove('drag');
