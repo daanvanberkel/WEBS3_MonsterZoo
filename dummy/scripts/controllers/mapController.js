@@ -3,6 +3,7 @@ import { MapService } from "../services/mapService.js";
 
 export class MapController {
 
+    mapName = 'forest';
     draggingTileComponent;
 
     constructor(mainController) {
@@ -141,7 +142,10 @@ export class MapController {
         this.draggingTileComponent.render();
         tileComponent.render();
 
-        // TODO: Save tile to LocalStorage
+        
+
+        // TODO: Save tile to LocalStorage (line below not working)
+        // ! this.monsterService.deleteMonster(this.mapName, this.draggingTileComponent.posX, this.draggingTileComponent.posY);
     }
 
     /**
@@ -153,6 +157,8 @@ export class MapController {
             if (e.target.dataset.map == undefined){
                 return;
             }
+
+            this.mapName = e.target.dataset.map;
             
             // TODO: LOAD MAP FROM API
 

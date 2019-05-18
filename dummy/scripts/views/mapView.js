@@ -21,6 +21,7 @@ export class MapView {
         grid.classList.add('grid');
 
         // loop trough rows in map grid
+        let rowCount = -1;  // -1 compensate for borders
         for(let row of map.grid) {
 
             // create html row
@@ -28,11 +29,14 @@ export class MapView {
             htmlRow.classList.add('row');
             
             // loop trough tiles in the row
+            let colCount = -1; // -1 compensate for borders
             for(let tile of row) {
 
                 // create html of the tile
                 let t = document.createElement('tile-component');
                 t.tile = tile;
+                t.posY = rowCount;
+                t.posX = colCount;
 
                 t.addEventListener("mousedown", (e)=>{
                     this.controller.tileMouseDown(e.target);
@@ -43,9 +47,13 @@ export class MapView {
                 });
 
                 htmlRow.appendChild(t);
+
+                colCount++;
             }
 
             grid.appendChild(htmlRow);
+
+            rowCount++;
         }
 
         this.element.appendChild(grid);

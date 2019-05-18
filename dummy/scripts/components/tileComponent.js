@@ -1,5 +1,7 @@
 export class TileComponent extends HTMLElement {
-
+    posX;
+    posY;
+    
     connectedCallback() {
         this.render();
 
