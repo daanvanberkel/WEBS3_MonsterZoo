@@ -24,6 +24,11 @@ $folder : 'Forest';
                             &.obstacle-3 {
                                 background-image: url("../images/#{$folder}/obstacle3.png");
                             }
+
+                            &:hover{
+                                filter: sepia(90%) hue-rotate(760deg);
+                                cursor: pointer;
+                            }
                         }
 
                         // Left column

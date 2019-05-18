@@ -79,6 +79,9 @@ table {
       background-image: url("../images/Forest/obstacle2.png"); }
     .container.forest .row #zoo .grid .row .tile.obstacle-3 {
       background-image: url("../images/Forest/obstacle3.png"); }
+    .container.forest .row #zoo .grid .row .tile:hover {
+      filter: sepia(90%) hue-rotate(760deg);
+      cursor: pointer; }
   .container.forest .row #zoo .grid .row .tile:nth-child(1) {
     background-image: url("../images/Forest/border/left.png"); }
   .container.forest .row #zoo .grid .row .tile:last-child {
@@ -107,6 +110,9 @@ table {
       background-image: url("../images/Desert/obstacle2.png"); }
     .container.desert .row #zoo .grid .row .tile.obstacle-3 {
       background-image: url("../images/Desert/obstacle3.png"); }
+    .container.desert .row #zoo .grid .row .tile:hover {
+      filter: sepia(90%) hue-rotate(700deg);
+      cursor: pointer; }
   .container.desert .row #zoo .grid .row .tile:nth-child(1) {
     background-image: url("../images/Desert/border/left.png"); }
   .container.desert .row #zoo .grid .row .tile:last-child {
@@ -135,6 +141,9 @@ table {
       background-image: url("../images/Snow/obstacle2.png"); }
     .container.snow .row #zoo .grid .row .tile.obstacle-3 {
       background-image: url("../images/Snow/obstacle3.png"); }
+    .container.snow .row #zoo .grid .row .tile:hover {
+      filter: sepia(90%) hue-rotate(530deg);
+      cursor: pointer; }
   .container.snow .row #zoo .grid .row .tile:nth-child(1) {
     background-image: url("../images/Snow/border/left.png"); }
   .container.snow .row #zoo .grid .row .tile:last-child {
