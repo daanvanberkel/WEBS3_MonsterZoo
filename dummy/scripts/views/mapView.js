@@ -16,7 +16,6 @@ export class MapView {
      * @param {Models/Zoo} zoo
      */
     drawMap(zoo) {
-
         // clear grid
         this.element.innerHTML = "";
 

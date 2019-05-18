@@ -1,11 +1,6 @@
 "use strict";
 
-import { ZooController } from "./controllers/zooController.js";
-import { MonsterConfiguratorComponent } from "./components/monsterConfigurator.js";
-import { TileComponent } from "./components/tileComponent.js";
+import { MainController } from "./controllers/mainController.js";
 
-window.customElements.define('monster-configurator', MonsterConfiguratorComponent);
-window.customElements.define('tile-component', TileComponent);
-
-const zooController = new ZooController();
-zooController.start('forest');
+const ctrl = new MainController();
+ctrl.start('forest');

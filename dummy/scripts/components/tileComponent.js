@@ -18,6 +18,7 @@ export class TileComponent extends HTMLElement {
             return;
         }
 
+        
         if (this.tile.monster) {
             let monsterImg = document.createElement('img');
             monsterImg.src = `/images/Monsters/${this.tile.monster.typeName}/${this.tile.monster.imgFile}`;

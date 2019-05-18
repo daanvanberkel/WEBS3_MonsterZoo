@@ -1,56 +1,57 @@
-import { Monster } from "../models/monster";
+import { Monster } from "../models/monster.js";
 
 export class MonsterService {
     /**
      * Get all monsters from localstorage
      */
-    getMonsters() {
+    getMonsters(mapType) {
         return new Promise(resolve => {
-            let monsters = localStorage.getItem('monsters');
+            let stored = localStorage.getItem('monsters');
 
-            if (!monsters) {
-                resolve([]);
+            if (!stored) {
+                resolve({});
                 return;
             }
 
-            monsters = JSON.parse(monsters);
+            stored = JSON.parse(stored);
+            let monsters = {};
 
-            if (!Array.isArray(monsters)) {
-                localStorage.removeItem('monsters');
-                resolve([]);
-                return;
-            }
+            for(let type in stored) {
+                monsters[type] = {};
 
-            for(let rows of monsters) {
-                for(let monster of rows) {
-                    monster = Object.assign(new Monster, monster);
+                for(let row in stored[type]) {
+                    monsters[type][row] = {};
+
+                    for(let col in stored[type][row]) {
+                        monsters[type][row][col] = Object.assign(new Monster, stored[type][row][col]);
+                    }
                 }
             }
-
-            resolve(monsters);
+            
+            if (mapType) {
+                resolve(monsters[mapType]);
+            } else {
+                resolve(monsters);
+            }
         });
     }
 
     /**
      * Get monster from localstorage at specific row and column
      * 
+     * @param {string} type Grid type (ex. forest)
      * @param {number} row Monster row
      * @param {number} col Monster column
      */
-    getMonster(row, col) {
+    getMonster(type, row, col) {
         return new Promise(resolve => {
             this.getMonsters().then(monsters => {
-                if (!monsters[row]) {
+                if (!monsters[type] || !monsters[type][row] || !monsters[type][row][col]) {
                     resolve(null);
                     return;
                 }
 
-                if (!monsters[row][col]) {
-                    resolve(null);
-                    return;
-                }
-
-                resolve(monsters[row][col]);
+                resolve(monsters[type][row][col]);
             });
         });
     }
@@ -59,26 +60,33 @@ export class MonsterService {
      * Save monster to localstorage
      * 
      * @param {Monster} monster 
+     * @param {string} type     Grid type (ex. forest)
      * @param {number} row 
      * @param {number} col 
      */
-    saveMonster(monster) {
+    saveMonster(monster, type, row, col) {
         return new Promise((resolve, reject) => {
-            if (this.getMonster(monster.row_pos, monster.col_pos)) {
-                reject(new Error("Er is al een monster aanwezig in dit verblijf!"));
-                return;
-            }
-
-            this.getMonsters().then(monsters => {
-                if (!monsters[row]) {
-                    monsters[row] = {};
+            this.getMonster(type, row, col).then(m => {
+                if (m) {
+                    reject(new Error("Er is al een monster aanwezig in dit verblijf!"));
+                    return;
                 }
+    
+                this.getMonsters().then(monsters => {
+                    if (!monsters[type]) {
+                        monsters[type] = {};
+                    }
 
-                monsters[row][col] = monster;
-
-                localStorage.setItem('monsters', JSON.stringify(monsters));
-
-                resolve();
+                    if (!monsters[type][row]) {
+                        monsters[type][row] = {};
+                    }
+    
+                    monsters[type][row][col] = monster;
+    
+                    localStorage.setItem('monsters', JSON.stringify(monsters));
+    
+                    resolve();
+                });
             });
         });
     }
@@ -86,14 +94,15 @@ export class MonsterService {
     /**
      * Delete monster from localstorage
      * 
+     * @param {string} type Grid type (ex. forest)
      * @param {number} row 
      * @param {number} col 
      */
-    deleteMonster(row, col) {
+    deleteMonster(type, row, col) {
         return new Promise(resolve => {
             this.getMonsters().then(monsters => {
-                if (monsters[row]) {
-                    delete monsters[row][col];
+                if (monsters[type] && monsters[type][row]) {
+                    delete monsters[type][row][col];
                 }
 
                 localStorage.setItem('monsters', JSON.stringify(monsters));
