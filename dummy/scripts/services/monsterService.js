@@ -21,8 +21,10 @@ export class MonsterService {
                 return;
             }
 
-            for(let monster of monsters) {
-                monster = Object.assign(new Monster, monster);
+            for(let rows of monsters) {
+                for(let monster of rows) {
+                    monster = Object.assign(new Monster, monster);
+                }
             }
 
             resolve(monsters);
@@ -38,7 +40,17 @@ export class MonsterService {
     getMonster(row, col) {
         return new Promise(resolve => {
             this.getMonsters().then(monsters => {
-                resolve(monsters.find(monster => monster.row_pos === row && monster.col_pos === col));
+                if (!monsters[row]) {
+                    resolve(null);
+                    return;
+                }
+
+                if (!monsters[row][col]) {
+                    resolve(null);
+                    return;
+                }
+
+                resolve(monsters[row][col]);
             });
         });
     }
@@ -52,18 +64,17 @@ export class MonsterService {
      */
     saveMonster(monster) {
         return new Promise((resolve, reject) => {
-            if (!monster.row_pos || !monster.col_pos) {
-                reject(new Error("Monster row position or column position is missing"));
-                return;
-            }
-
             if (this.getMonster(monster.row_pos, monster.col_pos)) {
                 reject(new Error("Er is al een monster aanwezig in dit verblijf!"));
                 return;
             }
 
             this.getMonsters().then(monsters => {
-                monsters.push(monster);
+                if (!monsters[row]) {
+                    monsters[row] = {};
+                }
+
+                monsters[row][col] = monster;
 
                 localStorage.setItem('monsters', JSON.stringify(monsters));
 
@@ -79,20 +90,15 @@ export class MonsterService {
      * @param {number} col 
      */
     deleteMonster(row, col) {
-        return new Promise((resolve, reject) => {
+        return new Promise(resolve => {
             this.getMonsters().then(monsters => {
-                let monster = monsters.find(m => m.row_pos === row && m.col_pos === col);
-
-                if (!monster) {
-                    reject(new Error("Er zit geen monster in dit verblijf!"));
-                    return;
+                if (monsters[row]) {
+                    delete monsters[row][col];
                 }
 
-                let index = monsters.indexOf(monster);
-
-                monsters.splice(index, 1);
-
                 localStorage.setItem('monsters', JSON.stringify(monsters));
+
+                resolve();
             });
         });
     }

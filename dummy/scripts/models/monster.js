@@ -9,8 +9,6 @@ export class Monster {
     fur;
     fly;
     color;
-    row_pos;
-    col_pos;
 
     constructor(data) {
         Object.assign(this, data);
