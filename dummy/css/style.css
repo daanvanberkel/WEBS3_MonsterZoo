@@ -282,10 +282,10 @@ monster-configurator {
             width: 64px;
             height: 64px;
             text-align: center;
-            line-height: 64px; }
+            line-height: 64px;
+            user-select: none; }
             .container .row #zoo .grid .row .tile img {
-              pointer-events: none;
-              user-select: none; }
+              pointer-events: none; }
             .container .row #zoo .grid .row .tile.hide-monster img {
               display: none; }
       .container .row #zoo.drag .dragImg {

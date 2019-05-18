@@ -58,8 +58,8 @@ export class MapView {
         this.element.appendChild(this.dragImg);
 
         this.element.addEventListener("mousemove", (e) => {
-            this.dragImg.style.top = e.clientY - this.dragImg.clientHeight / 2;
-            this.dragImg.style.left = e.clientX - this.dragImg.clientWidth / 2;
+            this.dragImg.style.top = e.clientY - 32;
+            this.dragImg.style.left = e.clientX - 32;
         });
 
     }

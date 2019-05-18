@@ -111,10 +111,10 @@ $third-border-size: 5px;
                         text-align: center;
                         // border: 1px solid;
                         line-height: $tile-size;
+                        user-select: none;
 
                         img{
                             pointer-events: none;
-                            user-select: none;
                         }
 
                         &.hide-monster{
