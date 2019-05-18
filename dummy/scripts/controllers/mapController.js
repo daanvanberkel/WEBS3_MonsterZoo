@@ -2,6 +2,9 @@ import { MapView } from "../views/mapView.js";
 import { MapService } from "../services/mapService.js";
 
 export class MapController {
+
+    draggingTileComponent;
+
     constructor(mainController) {
         // Main Controller
         this.mainController = mainController;
@@ -11,7 +14,7 @@ export class MapController {
         this.mapService = new MapService();
 
         // Views
-        this.mapView = new MapView();
+        this.mapView = new MapView(this);
 
         // Listeners
         this.addMapSwitchHandler();
@@ -21,7 +24,6 @@ export class MapController {
         this.mapService.getMap(mapName).then(map => {
             this.map = map;
             this.drawMap(map);
-
             this.mainController.mainContainer.classList.remove('fade-out');
             this.mainController.mainContainer.classList.add('fade-in');
         }).catch(err => {
@@ -95,6 +97,42 @@ export class MapController {
 
     handleClick(tile) {
         this.mainController.handleClick(tile);
+    }
+
+    /**
+     * User Mousedown on Monster
+     */
+    tileMouseDown(tileComponent){
+
+        // cancel if not dragging a monster
+        if (tileComponent.tile.monster == null){return;}
+
+        this.draggingTileComponent = tileComponent;
+    }
+
+    tileMouseUp(tileComponent){
+        
+
+        // cancel if no monster was dragged
+        if (this.draggingTileComponent == null){ return; }
+
+        // cancel if placed on invalid tile
+        if (tileComponent.classList.contains('free-tile') == false){ 
+            this.draggingTileComponent = null;
+            return; 
+        }
+
+        // set tile monster to dragged tile monster
+        tileComponent.tile.monster = this.draggingTileComponent.tile.monster;
+
+        // clear the dragged tile
+        this.draggingTileComponent.tile.monster = null;
+
+        // renders
+        this.draggingTileComponent.render();
+        tileComponent.render();
+
+        // TODO: Save tile to LocalStorage
     }
 
     /**

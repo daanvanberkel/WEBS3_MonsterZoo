@@ -283,3 +283,6 @@ monster-configurator {
             height: 64px;
             text-align: center;
             line-height: 64px; }
+            .container .row #zoo .grid .row .tile img {
+              pointer-events: none;
+              user-select: none; }

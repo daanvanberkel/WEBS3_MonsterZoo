@@ -36,6 +36,9 @@ export class TileComponent extends HTMLElement {
             this.appendChild(monsterImg);
             this.classList.remove("free-tile");
         } else {
+            if (this.querySelector('img')){
+                this.querySelector('img').remove();
+            }
             this.classList.add('free-tile');
         }
     }

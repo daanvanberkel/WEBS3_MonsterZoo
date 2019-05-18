@@ -1,6 +1,8 @@
 export class MapView {
+    controller;
 
-    constructor() {
+    constructor(controller) {
+        this.controller = controller;
         this.element = document.querySelector('#zoo');
     }
 
@@ -30,6 +32,14 @@ export class MapView {
                 // create html of the tile
                 let t = document.createElement('tile-component');
                 t.tile = tile;
+                
+                t.addEventListener("mousedown", (e)=>{
+                    this.controller.tileMouseDown(e.target);
+                });
+
+                t.addEventListener("mouseup", (e)=>{
+                    this.controller.tileMouseUp(e.target);
+                });
 
                 htmlRow.appendChild(t);
             }

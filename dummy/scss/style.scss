@@ -111,6 +111,11 @@ $third-border-size: 5px;
                         text-align: center;
                         // border: 1px solid;
                         line-height: $tile-size;
+
+                        img{
+                            pointer-events: none;
+                            user-select: none;
+                        }
                     }
                 }
             }
