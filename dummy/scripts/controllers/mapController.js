@@ -11,7 +11,7 @@ export class MapController {
         this.mapService = new MapService();
 
         // Views
-        this.mapView = new MapView(this);
+        this.mapView = new MapView();
 
         // Listeners
         this.addMapSwitchHandler();

@@ -1,21 +1,15 @@
 export class MapView {
 
-    /**
-     * Bind to HTML element and ZooController
-     * 
-     * @param {ZooController} controller 
-     */
-    constructor(zooController) {
+    constructor() {
         this.element = document.querySelector('#zoo');
-        this.controller = zooController;
     }
 
     /**
-     * Render HTML layout from Zoo Model
+     * Render HTML layout from Map Model
      * 
-     * @param {Models/Zoo} zoo
+     * @param {Models/Map} map
      */
-    drawMap(zoo) {
+    drawMap(map) {
         // clear grid
         this.element.innerHTML = "";
 
@@ -23,8 +17,8 @@ export class MapView {
         const grid = document.createElement('div');
         grid.classList.add('grid');
 
-        // loop trough rows in zoo grid
-        for(let row of zoo.grid) {
+        // loop trough rows in map grid
+        for(let row of map.grid) {
 
             // create html row
             const htmlRow = document.createElement('div');
@@ -37,10 +31,6 @@ export class MapView {
                 let t = document.createElement('tile-component');
                 t.tile = tile;
 
-                t.addEventListener('click', e => {
-                    this.controller.handleClick(tile);
-                });
-
                 htmlRow.appendChild(t);
             }
 
@@ -48,7 +38,5 @@ export class MapView {
         }
 
         this.element.appendChild(grid);
-    } 
-
-    // TODO: Create monster render function
+    }
 }

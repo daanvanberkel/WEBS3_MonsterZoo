@@ -2,6 +2,17 @@ export class TileComponent extends HTMLElement {
 
     connectedCallback() {
         this.render();
+
+        this.addEventListener('click', e => {
+            if (this.tile.monster) {
+                let monsterClickEvent = new CustomEvent('monsterClicked', {
+                    bubbles: true,
+                    detail: this.tile.monster
+                });
+
+                this.dispatchEvent(monsterClickEvent);
+            }
+        });
     }
 
     render() {
@@ -18,14 +29,13 @@ export class TileComponent extends HTMLElement {
             return;
         }
 
-        
         if (this.tile.monster) {
             let monsterImg = document.createElement('img');
             monsterImg.src = `/images/Monsters/${this.tile.monster.typeName}/${this.tile.monster.imgFile}`;
             monsterImg.classList.add('monster');
             this.appendChild(monsterImg);
             this.classList.remove("free-tile");
-        }else{
+        } else {
             this.classList.add('free-tile');
         }
     }

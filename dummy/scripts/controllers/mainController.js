@@ -26,7 +26,8 @@ export class MainController {
         this.mainContainer = document.querySelector(".container");
         this.monsterConfigurator = document.querySelector('monster-configurator');
 
-        // Pass monster to mapController if user clicks on 'Save'
+        // Event listeners
+        this.handleMonsterClick();
         this.monsterConfigurator.addEventListener('monsterCreated', e => this.mapController.addMonster(e.detail));
     }
 
@@ -34,11 +35,13 @@ export class MainController {
         this.mapController.start(mapName);    
     }
 
-    /**
-     * Trigger: When user clicks on a tile
-     * @param {Tile} tile 
-     */
-    handleClick(tile) {
-        this.statisticsView.show(tile);
+    handleMonsterClick() {
+        document.addEventListener('monsterClicked', e => {
+            this.showMonsterStatistics(e.detail);
+        });
+    }
+
+    showMonsterStatistics(monster) {
+        this.statisticsView.show(monster);
     }
 }
