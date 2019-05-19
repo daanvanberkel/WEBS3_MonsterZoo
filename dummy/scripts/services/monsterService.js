@@ -102,7 +102,6 @@ export class MonsterService {
         
         return new Promise(resolve => {
             this.getMonsters().then(monsters => {
-
                 if (monsters[type] && monsters[type][row]) {
                     delete monsters[type][row][col];
                 }

@@ -142,10 +142,15 @@ export class MapController {
         this.draggingTileComponent.render();
         tileComponent.render();
 
-        
-
-        // TODO: Remove old tile and add newone to LocalStore (line below not working)
-        // ! this.monsterService.deleteMonster(this.mapName, this.draggingTileComponent.posX, this.draggingTileComponent.posY);
+        this.monsterService.deleteMonster(this.mapName, this.draggingTileComponent.posY, this.draggingTileComponent.posX).then(() => {
+            this.monsterService.saveMonster(tileComponent.tile.monster, this.mapName, tileComponent.posY, tileComponent.posX).then(() => {
+                console.log('Monster saved');
+            }).catch(err => {
+                console.log("Saving monster failed");
+                console.log(err);
+                // TODO: Show error to user
+            });
+        });
     }
 
     /**
