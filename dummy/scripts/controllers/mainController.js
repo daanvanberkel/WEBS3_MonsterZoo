@@ -3,6 +3,7 @@ import { MapController } from "./mapController.js";
 import { MonsterService } from "../services/monsterService.js";
 import { MonsterConfiguratorComponent } from "../components/monsterConfigurator.js";
 import { TileComponent } from "../components/tileComponent.js";
+import { WeatherService } from "../services/weatherService.js";
 
 export class MainController {
 
@@ -17,6 +18,7 @@ export class MainController {
 
         // Services
         this.monsterService = new MonsterService();
+        this.weatherService = new WeatherService();
 
         // Controllers
         this.mapController = new MapController(this);
