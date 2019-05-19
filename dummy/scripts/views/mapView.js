@@ -2,8 +2,7 @@ export class MapView {
     controller;
     dragImg;
 
-    constructor(controller) {
-        this.controller = controller;
+    constructor() {
         this.element = document.querySelector('#zoo');
     }
 
@@ -37,14 +36,6 @@ export class MapView {
                 t.tile = tile;
                 t.posY = rowCount;
                 t.posX = colCount;
-
-                t.addEventListener("mousedown", (e)=>{
-                    this.controller.tileMouseDown(e.target);
-                });
-
-                t.addEventListener("mouseup", (e)=>{
-                    this.controller.tileMouseUp(e.target);
-                });
 
                 htmlRow.appendChild(t);
 

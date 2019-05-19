@@ -15,6 +15,20 @@ export class TileComponent extends HTMLElement {
                 this.dispatchEvent(monsterClickEvent);
             }
         });
+
+        this.addEventListener("mousedown", e => {
+            this.dispatchEvent(new CustomEvent('tileMouseDown', {
+                bubbles: true,
+                detail: e.target
+            }));
+        });
+
+        this.addEventListener("mouseup", e => {
+            this.dispatchEvent(new CustomEvent('tileMouseUp', {
+                bubbles: true,
+                detail: e.target
+            }));
+        });
     }
 
     render() {

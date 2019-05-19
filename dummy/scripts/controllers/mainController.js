@@ -19,7 +19,7 @@ export class MainController {
         // Services
         this.monsterService = new MonsterService();
         this.weatherService = new WeatherService();
-        
+
         // Controllers
         this.mapController = new MapController(this);
 

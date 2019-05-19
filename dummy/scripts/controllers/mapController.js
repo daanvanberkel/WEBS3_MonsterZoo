@@ -15,12 +15,18 @@ export class MapController {
         this.mapService = new MapService();
 
         // Views
-        this.mapView = new MapView(this);
+        this.mapView = new MapView();
 
         // Listeners
         this.addMapSwitchHandler();
+        this.addTileDragHandler();
     }
 
+    /**
+     * Setup map
+     * 
+     * @param {string} mapName 
+     */
     start(mapName) {
         this.mapService.getMap(mapName).then(map => {
             this.map = map;
@@ -33,6 +39,11 @@ export class MapController {
         });
     }
 
+    /**
+     * Add monster from monsterconfigurator to map
+     * 
+     * @param {Monster} monster 
+     */
     addMonster(monster) {
         // find free tile
         let tiles = Array.from(document.querySelectorAll("tile-component"));
@@ -57,6 +68,11 @@ export class MapController {
         }
     }
 
+    /**
+     * Add monsters from storage to the map and let the view draw the map
+     * 
+     * @param {Map} map 
+     */
     drawMap(map) {
         // Show saved monsters on the map
         this.monsterService.getMonsters(map.name).then(monsters => {
@@ -96,8 +112,26 @@ export class MapController {
         });
     }
 
+    /**
+     * Handle click on tile
+     * 
+     * @param {Tile} tile 
+     */
     handleClick(tile) {
         this.mainController.handleClick(tile);
+    }
+
+    /**
+     * Add drag-drop event listeners
+     */
+    addTileDragHandler() {
+        document.addEventListener('tileMouseDown', e => {
+            this.tileMouseDown(e.detail);
+        });
+
+        document.addEventListener('tileMouseUp', e => {
+            this.tileMouseUp(e.detail);
+        });
     }
 
     /**
@@ -165,8 +199,6 @@ export class MapController {
 
             this.mapName = e.target.dataset.map;
             
-            // TODO: LOAD MAP FROM API
-
             // fade map out
             this.mainController.mainContainer.classList.remove('fade-in');
             this.mainController.mainContainer.classList.add('fade-out');
