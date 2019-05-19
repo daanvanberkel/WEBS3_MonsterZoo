@@ -213,6 +213,18 @@ monster-configurator {
       width: 100%;
       margin-left: 10px; }
 
+.weather-container {
+  display: flex;
+  flex-direction: row;
+  width: 25%;
+  justify-content: center;
+  align-items: center; }
+  .weather-container .weather-icon {
+    max-width: 40px;
+    margin-right: 20px; }
+  .weather-container .weather-temp {
+    font-family: pixel; }
+
 .container {
   height: 100%;
   display: flex;

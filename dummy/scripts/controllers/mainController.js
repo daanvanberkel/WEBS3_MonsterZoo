@@ -4,6 +4,7 @@ import { MonsterService } from "../services/monsterService.js";
 import { MonsterConfiguratorComponent } from "../components/monsterConfigurator.js";
 import { TileComponent } from "../components/tileComponent.js";
 import { WeatherService } from "../services/weatherService.js";
+import { WeatherView } from "../views/weatherView.js";
 
 export class MainController {
 
@@ -20,13 +21,14 @@ export class MainController {
         this.monsterService = new MonsterService();
         this.weatherService = new WeatherService();
 
-        // Controllers
-        this.mapController = new MapController(this);
-
         // Views
         this.statisticsView = new StatisticsView();
+        this.weatherView = new WeatherView();
         this.mainContainer = document.querySelector(".container");
         this.monsterConfigurator = document.querySelector('monster-configurator');
+
+        // Controllers
+        this.mapController = new MapController(this);
 
         // Event listeners
         this.handleMonsterClick();

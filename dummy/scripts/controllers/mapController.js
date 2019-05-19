@@ -13,9 +13,11 @@ export class MapController {
         // Services
         this.monsterService = mainController.monsterService;
         this.mapService = new MapService();
+        this.weatherService = mainController.weatherService;
 
         // Views
         this.mapView = new MapView();
+        this.weatherView = mainController.weatherView;
 
         // Listeners
         this.addMapSwitchHandler();
@@ -33,6 +35,12 @@ export class MapController {
             this.drawMap(map);
             this.mainController.mainContainer.classList.remove('fade-out');
             this.mainController.mainContainer.classList.add('fade-in');
+
+            console.log(map);
+
+            this.weatherService.getWeather(map.city).then(weather => {
+                this.weatherView.drawWeather(weather);
+            });
         }).catch(err => {
             console.log('Cannot load map');
             console.log(err);
