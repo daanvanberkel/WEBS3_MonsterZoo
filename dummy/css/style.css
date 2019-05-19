@@ -218,6 +218,21 @@ monster-configurator {
   display: flex;
   flex-flow: column;
   background-size: 64px; }
+  .container .map_button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: pixel;
+    text-transform: capitalize;
+    padding: 10px;
+    border: 2px solid #676767;
+    background-color: #efefef;
+    font-size: 16px;
+    margin: 15px;
+    cursor: pointer;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.2); }
+    .container .map_button:disabled {
+      cursor: not-allowed; }
   .container.fade-out {
     animation: fade-out 300ms;
     animation-fill-mode: forwards; }
@@ -245,7 +260,12 @@ monster-configurator {
       flex: 1 1 auto; }
     .container .row.main-footer {
       flex: 0 1 64px;
-      justify-content: center; }
+      justify-content: center;
+      font-family: pixel;
+      font-size: 10px; }
+      .container .row.main-footer a {
+        text-decoration: none;
+        color: inherit; }
     .container .row * {
       box-sizing: border-box; }
     .container .row #configurator {
