@@ -345,7 +345,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     const nameField = this.createTextField("name", "Naam");
 
     nameField.addEventListener("keyup", e => {
-      this.monsterName = e.target.value;
+      this.monster.name = e.target.value;
     });
 
     this.fieldElements["name"] = nameField;
@@ -488,6 +488,12 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     container.appendChild(saveBtn);
 
     saveBtn.addEventListener('click', () => {
+      if (!this.monster.name) {
+        console.log("Monster needs a name!");
+        // TODO: Show error to user
+        return;
+      }
+
       const event = new CustomEvent('monsterCreated', {
         detail: this.monster
       });

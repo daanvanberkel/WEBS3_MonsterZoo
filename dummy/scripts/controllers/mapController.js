@@ -36,8 +36,6 @@ export class MapController {
             this.mainController.mainContainer.classList.remove('fade-out');
             this.mainController.mainContainer.classList.add('fade-in');
 
-            console.log(map);
-
             this.weatherService.getWeather(map.city).then(weather => {
                 this.weatherView.drawWeather(weather);
             });
