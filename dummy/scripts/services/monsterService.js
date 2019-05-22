@@ -23,7 +23,14 @@ export class MonsterService {
                     monsters[type][row] = {};
 
                     for(let col in stored[type][row]) {
-                        monsters[type][row][col] = Object.assign(new Monster, stored[type][row][col]);
+                        let data = stored[type][row][col];
+
+                        // skip empty monster
+                        if (Object.entries(data).length === 0 && data.constructor === Object){
+                            continue;
+                        }
+                        
+                        monsters[type][row][col] = Object.assign(new Monster, data);
                     }
                 }
             }
