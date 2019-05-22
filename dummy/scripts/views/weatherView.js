@@ -19,4 +19,8 @@ export class WeatherView {
 
         this.element.appendChild(temp);
     }
+
+    clearWeather() {
+        this.element.innerHTML = '';
+    }
 }

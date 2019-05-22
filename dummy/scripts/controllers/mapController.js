@@ -30,6 +30,8 @@ export class MapController {
      * @param {string} mapName 
      */
     start(mapName) {
+        this.weatherView.clearWeather();
+
         this.mapService.getMap(mapName).then(map => {
             this.map = map;
             this.drawMap(map);
