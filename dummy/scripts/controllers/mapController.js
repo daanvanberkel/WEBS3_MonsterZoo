@@ -102,14 +102,14 @@ export class MapController {
                             continue;
                         }
 
-                        // Skip columns where no monsters are stored
-                        if (!monsters[r - 1][col]) {
-                            continue;
-                        }
-                        
                         let c = parseInt(col);
 
-                        map.grid[r][c + 1].monster = monsters[r - 1][c];
+                        // Skip columns where no monsters are stored
+                        if (!monsters[r - 1][c - 1]) {
+                            continue;
+                        }
+
+                        map.grid[r][c].monster = monsters[r - 1][c - 1];
                     }
                 }
             }
