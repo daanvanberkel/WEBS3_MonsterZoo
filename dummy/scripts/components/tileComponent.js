@@ -22,13 +22,6 @@ export class TileComponent extends HTMLElement {
                 detail: e.target
             }));
         });
-
-        this.addEventListener("mouseup", e => {
-            this.dispatchEvent(new CustomEvent('tileMouseUp', {
-                bubbles: true,
-                detail: e.target
-            }));
-        });
     }
 
     render() {

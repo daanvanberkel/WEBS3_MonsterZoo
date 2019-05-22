@@ -16,7 +16,7 @@ export class MapController {
         this.weatherService = mainController.weatherService;
 
         // Views
-        this.mapView = new MapView();
+        this.mapView = new MapView(this);
         this.weatherView = mainController.weatherView;
 
         // Listeners

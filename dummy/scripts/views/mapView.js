@@ -2,8 +2,9 @@ export class MapView {
     controller;
     dragImg;
 
-    constructor() {
+    constructor(controller) {
         this.element = document.querySelector('#zoo');
+        this.controller = controller;
     }
 
     /**
@@ -55,9 +56,13 @@ export class MapView {
         this.dragImg.classList.add('dragImg');
         this.element.appendChild(this.dragImg);
 
-        this.element.addEventListener("mousemove", (e) => {
+        document.addEventListener("mousemove", (e) => {
             this.dragImg.style.top = e.clientY - 32;
             this.dragImg.style.left = e.clientX - 32;
+        });
+
+        document.addEventListener("mouseup", (e) => {
+            this.controller.tileMouseUp(e.target);
         });
 
     }
