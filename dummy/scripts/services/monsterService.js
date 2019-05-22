@@ -26,10 +26,10 @@ export class MonsterService {
                         let data = stored[type][row][col];
 
                         // skip empty monster
-                        if (Object.entries(data).length === 0 && data.constructor === Object){
+                        if ( (data == null) || (Object.entries(data).length === 0 )){
                             continue;
                         }
-                        
+
                         monsters[type][row][col] = Object.assign(new Monster, data);
                     }
                 }
