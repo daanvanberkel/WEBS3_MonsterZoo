@@ -159,7 +159,7 @@ export class MapController {
     /**
      * User MouseUp on tile
      */
-    tileMouseUp(tileComponent){
+    tileMouseUp(component){
 
         this.mapView.element.classList.remove('drag');
         
@@ -168,24 +168,31 @@ export class MapController {
 
         this.draggingTileComponent.classList.remove('hide-monster');
 
+        // check if dragged on configurator
+        if (document.getElementById('configurator').contains(component)){
+            this.mainController.monsterConfigurator.update(this.draggingTileComponent.tile.monster);
+            this.draggingTileComponent.tile.monster = null;
+            this.draggingTileComponent.render();
+        }
+
         // cancel if placed on invalid tile
-        if (tileComponent.classList.contains('free-tile') == false){ 
+        if (component.classList.contains('free-tile') == false){ 
             this.draggingTileComponent = null;
             return; 
         }
 
         // set tile monster to dragged tile monster
-        tileComponent.tile.monster = this.draggingTileComponent.tile.monster;
+        component.tile.monster = this.draggingTileComponent.tile.monster;
 
         // clear the dragged tile
         this.draggingTileComponent.tile.monster = null;
 
         // renders
         this.draggingTileComponent.render();
-        tileComponent.render();
+        component.render();
 
         this.monsterService.deleteMonster(this.mapName, this.draggingTileComponent.posY, this.draggingTileComponent.posX).then(() => {
-            this.monsterService.saveMonster(tileComponent.tile.monster, this.mapName, tileComponent.posY, tileComponent.posX).then(() => {
+            this.monsterService.saveMonster(component.tile.monster, this.mapName, component.posY, component.posX).then(() => {
                 console.log('Monster saved');
             }).catch(err => {
                 console.log("Saving monster failed");

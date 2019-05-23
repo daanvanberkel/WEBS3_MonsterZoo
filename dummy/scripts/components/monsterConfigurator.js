@@ -44,7 +44,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
         name: "8 Armen"
       }
     ],
-    armsType: [
+    armType: [
       {
         enableIf: [{ type: ["water", "fire"] }],
         value: "tentacle",
@@ -252,7 +252,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     name: null,
     type: null,
     arms: null,
-    armsType: null,
+    armType: null,
     legs: null,
     eyes: null,
     fur: null,
@@ -283,6 +283,24 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     this.renderFields();
   }
 
+  update(monster){
+    this.monster = monster;
+    console.log("updating configurator", this.monster);
+    this.setSelectOptions();
+    const imgUrl = `/images/Monsters/${this.monster.typeName}/${this.monster.imgFile}`;
+    this.fieldElements["img"].src = imgUrl;
+    this.fieldElements["name"].value = this.monster.name;
+    this.fieldElements["type"].value = this.monster.type; 
+    this.fieldElements["arms"].value = this.monster.arms; 
+    this.fieldElements["armType"].value = this.monster.armType; 
+    this.fieldElements["legs"].value = this.monster.legs; 
+    this.fieldElements["eyes"].value = this.monster.eyes; 
+    this.fieldElements["fur"].value = this.monster.fur; 
+    this.fieldElements["fly"].value = this.monster.fly; 
+    this.fieldElements["swim"].value = this.monster.swim; 
+    this.fieldElements["color"].value = this.monster.color;
+  }
+
 
   /**
    * Render the monster icon
@@ -311,7 +329,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     this.setNameField();
     this.setTypeField();
     this.setSelectField('arms', (val) => parseInt(val));
-    this.setSelectField('armsType');
+    this.setSelectField('armType');
     this.setSelectField('legs', (val) => parseInt(val));
     this.setSelectField('eyes', (val) => parseInt(val));
     this.setSelectField('fur');
@@ -386,6 +404,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
   setSelectOptions() {
 
     for (let elementName in this.options) {
+
       // get select with all options
       let select = this.fieldElements[elementName];
       let options = this.options[elementName];
@@ -413,18 +432,20 @@ export class MonsterConfiguratorComponent extends HTMLElement {
             // check if all the attr matches with the option
             let allPropsMatches = true;
             for (var propName in criteria) {
-              if (!criteria[propName].includes(this.monster[propName])) {
+              if (criteria[propName].includes(this.monster[propName]) == false) {
                 allPropsMatches = false;
               }
             }
 
             addOption = allPropsMatches;
 
-            if (addOption == true) {
+            // if critira matched, dont check other ones
+            if (addOption == true) { 
               break;
             }
           }
 
+          // if not any match, skip all
           if (addOption == false) {
             continue;
           }
@@ -435,6 +456,8 @@ export class MonsterConfiguratorComponent extends HTMLElement {
         el.setAttribute("value", option.value);
         el.innerHTML = option.name;
         select.appendChild(el);
+
+        // TODO: set monster value as the same for option
       }
 
       // check if index is still avalible with new options
