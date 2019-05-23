@@ -418,6 +418,8 @@ export class MonsterConfiguratorComponent extends HTMLElement {
         }
       }
 
+      let addedOptions = []
+
       // loop trough all the options
       for (let option of options) {
 
@@ -456,8 +458,13 @@ export class MonsterConfiguratorComponent extends HTMLElement {
         el.setAttribute("value", option.value);
         el.innerHTML = option.name;
         select.appendChild(el);
+        addedOptions.push(option)
+        
+      }
 
-        // TODO: set monster value as the same for option
+      // change monster attr if, the option is not avaliable anymore
+      if (addedOptions.map(item => item.value).includes(this.monster[elementName]) == false){
+        this.monster[elementName] = addedOptions[0].value;
       }
 
       // check if index is still avalible with new options
