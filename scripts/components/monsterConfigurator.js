@@ -1,4 +1,4 @@
-import { Monster } from "./../models/monster.js";
+import { Monster } from "../models/monster.js";
 
 export class MonsterConfiguratorComponent extends HTMLElement {
   /* MONSTER VALUES */

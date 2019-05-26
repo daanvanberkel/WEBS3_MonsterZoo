@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dummy-scss": "node-sass --watch dummy/scss -o dummy/css",
-    "serve": "cd dummy && php -S localhost:8000",
+    "dummy-scss": "echo \"This command is deprecated, use npm run scss\" && exit 1",
+    "serve": "php -S localhost:8000",
     "scss": "node-sass --watch scss -o css"
   },
   "repository": {
