@@ -36,31 +36,41 @@ $third-border-size: 5px;
         font-size: 16px;
         margin: 15px;
         cursor: pointer;
-        box-shadow: 0 0 7px rgba(0,0,0,0.2);
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
 
         &:disabled {
             cursor: not-allowed;
         }
     }
 
-    &.fade-out{
+    &.fade-out {
         animation: fade-out 300ms;
         animation-fill-mode: forwards;
     }
 
-    &.fade-in{
+    &.fade-in {
         animation: fade-in 300ms;
         animation-fill-mode: forwards;
     }
-    
-    @keyframes fade-out{
-        0%   { opacity: 1; }
-        100% { opacity: 0; }
+
+    @keyframes fade-out {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
     }
 
-    @keyframes fade-in{
-        0%   { opacity: 0; }
-        100% { opacity: 1; }
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
     }
 
     .row {
@@ -123,7 +133,7 @@ $third-border-size: 5px;
             width: 100%;
             overflow-x: auto;
             background-size: $tile-size;
-            
+
             .grid {
                 display: flex;
                 flex-direction: column;
@@ -140,28 +150,58 @@ $third-border-size: 5px;
                         line-height: $tile-size;
                         user-select: none;
 
-                        img{
+                        img {
                             pointer-events: none;
                         }
 
-                        &.hide-monster{
-                            img{
+                        &.hide-monster {
+                            img {
                                 display: none;
+                            }
+                        }
+
+                        &.react {
+
+                            img {
+                                animation-name: react;
+                                animation-duration: 1s;
+                            }
+
+                            @keyframes react {
+                                0% {
+                                    transform: translateY(0);
+                                }
+
+                                25% {
+                                    transform: translateY(-10px);
+                                }
+
+                                50% {
+                                    transform: translateY(0px);
+                                }
+
+                                75% {
+                                    transform: translateY(-10px);
+                                }
+
+                                100% {
+                                    transform: translateY(0px);
+                                }
                             }
                         }
                     }
                 }
 
-                
+
             }
 
-            &.drag{
-                .dragImg{
+            &.drag {
+                .dragImg {
                     display: block;
                 }
             }
 
-            .dragImg{
+            .dragImg {
                 display: none;
                 pointer-events: none;
                 position: absolute;

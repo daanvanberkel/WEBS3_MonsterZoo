@@ -1,10 +1,12 @@
 export class MapView {
     controller;
     dragImg;
+    tiles;
 
     constructor(controller) {
         this.element = document.querySelector('#zoo');
         this.controller = controller;
+        this.tiles = [];
     }
 
     /**
@@ -39,6 +41,7 @@ export class MapView {
                 t.posX = colCount;
 
                 htmlRow.appendChild(t);
+                this.tiles.push(t);
 
                 colCount++;
             }
@@ -65,6 +68,32 @@ export class MapView {
             this.controller.tileMouseUp(e.target);
         });
 
+    }
+
+
+    monsterInteract(x, y){
+        let neighborsPos = [ 
+            { 'x' : x - 1, 'y' : y },
+            { 'x' : x + 1, 'y' : y },
+            { 'x' : x, 'y' : y - 1 },
+            { 'x' : x, 'y' : y + 1 },
+        ]
+
+        let neighborsTiles = this.tiles.filter(tile => {
+            for(let i in neighborsPos){
+                let pos = neighborsPos[i];
+                if ( (pos.x == tile.posX) &&  (pos.y == tile.posY) ){
+                    return true;
+                }
+            }
+
+            return false;
+        });
+        
+        // react each tile
+        neighborsTiles.forEach(tileComponent => {
+            tileComponent.react();
+        });
     }
 
 }

@@ -320,6 +320,21 @@ monster-configurator {
               pointer-events: none; }
             .container .row #zoo .grid .row .tile.hide-monster img {
               display: none; }
+            .container .row #zoo .grid .row .tile.react img {
+              animation-name: react;
+              animation-duration: 1s; }
+
+@keyframes react {
+  0% {
+    transform: translateY(0); }
+  25% {
+    transform: translateY(-10px); }
+  50% {
+    transform: translateY(0px); }
+  75% {
+    transform: translateY(-10px); }
+  100% {
+    transform: translateY(0px); } }
       .container .row #zoo.drag .dragImg {
         display: block; }
       .container .row #zoo .dragImg {

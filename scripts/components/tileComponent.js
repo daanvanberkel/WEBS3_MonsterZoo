@@ -1,6 +1,7 @@
 export class TileComponent extends HTMLElement {
     posX;
     posY;
+    tile;
     
     connectedCallback() {
         this.render();
@@ -50,5 +51,19 @@ export class TileComponent extends HTMLElement {
             }
             this.classList.add('free-tile');
         }
+    }
+
+    react(){
+        if (this.tile.monster == null){
+            return;
+        }
+
+        // TODO: Play sound
+
+        this.classList.add('react');
+
+        setTimeout(() => {
+            this.classList.remove('react');
+        }, 1000);
     }
 }

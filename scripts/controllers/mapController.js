@@ -61,11 +61,10 @@ export class MapController {
         if (freeTiles.length > 0){
             let freeTile = freeTiles[0];
             this.monsterService.saveMonster(monster, this.map.name, freeTile.tile.row, freeTile.tile.col).then(() => {
-                // Success
-                console.log('Monster saved');
-
                 freeTile.tile.monster = monster;
                 freeTile.render();
+                this.mapView.monsterInteract(freeTile.posX, freeTile.posY);
+                console.log('Monster saved', freeTile);
             }).catch(err => {
                 // Error
                 console.log('Failed to save monster');
@@ -164,7 +163,9 @@ export class MapController {
         this.mapView.element.classList.remove('drag');
         
         // cancel if no monster was dragged
-        if (this.draggingTileComponent == null){ return; }
+        if (this.draggingTileComponent == null){ 
+            return;
+        }
 
         this.draggingTileComponent.classList.remove('hide-monster');
 
@@ -193,6 +194,8 @@ export class MapController {
 
         this.monsterService.deleteMonster(this.mapName, this.draggingTileComponent.posY, this.draggingTileComponent.posX).then(() => {
             this.monsterService.saveMonster(component.tile.monster, this.mapName, component.posY, component.posX).then(() => {
+                this.mapView.monsterInteract(component.posX, component.posY);
+                this.draggingTileComponent = null;
                 console.log('Monster saved');
             }).catch(err => {
                 console.log("Saving monster failed");
