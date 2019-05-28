@@ -175,6 +175,9 @@ export class MapController {
             this.mainController.monsterConfigurator.update(this.draggingTileComponent.tile.monster);
             this.draggingTileComponent.tile.monster = null;
             this.draggingTileComponent.render();
+            this.monsterService.deleteMonster(this.mapName, this.draggingTileComponent.posY, this.draggingTileComponent.posX).then(() => {
+                console.log('Monster deleted');
+            });
         }
 
         // cancel if placed on invalid tile
@@ -221,6 +224,9 @@ export class MapController {
             // fade map out
             this.mainController.mainContainer.classList.remove('fade-in');
             this.mainController.mainContainer.classList.add('fade-out');
+
+            // clear statistics
+            this.mainController.statisticsView.hide();
 
             // wait for fade out
             setTimeout(() => {

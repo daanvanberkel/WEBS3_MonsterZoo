@@ -1,0 +1,37 @@
+#statistics-content {
+    position: absolute;
+    right: calc(-100% - #{$second-border-size} - #{$third-border-size});
+    width: 100%;
+    transition: 0.5s ease;
+    margin-right: 0;
+    border-right: 0;
+
+    &.show {
+        right: 0 - $second-border-size - $third-border-size;
+    }
+}
+
+#monster-details {
+
+    display: flex;
+    flex-flow: column;
+
+    .monster-icon {
+        width: 100px;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    .monster-name {
+        font-family: pixel;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .monster-details {
+        font-family: sans-serif;
+        line-height: 1.3em;
+    }
+}

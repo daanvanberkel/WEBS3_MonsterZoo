@@ -17,6 +17,7 @@ $third-border-size: 5px;
 @import 'snow';
 @import 'monster-configurator';
 @import 'weather';
+@import 'statistics';
 
 .container {
     height: 100%;
@@ -111,19 +112,6 @@ $third-border-size: 5px;
             width: 25%;
             position: relative;
             overflow: hidden;
-
-            #statistics-content {
-                position: absolute;
-                right: calc(-100% - #{$second-border-size} - #{$third-border-size});
-                width: 100%;
-                transition: 0.5s ease;
-                margin-right: 0;
-                border-right: 0;
-
-                &.show {
-                    right: 0 - $second-border-size - $third-border-size;
-                }
-            }
         }
 
         #zoo {
