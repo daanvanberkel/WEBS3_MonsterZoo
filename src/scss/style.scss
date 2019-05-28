@@ -142,6 +142,13 @@ $third-border-size: 5px;
                             pointer-events: none;
                         }
 
+                        &.empty-tile {
+                            &:hover {
+                                filter: none;
+                                cursor: inherit;
+                            }
+                        }
+
                         &.hide-monster {
                             img {
                                 display: none;

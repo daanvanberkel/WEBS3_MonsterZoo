@@ -178,6 +178,7 @@ export class MapController {
             this.monsterService.deleteMonster(this.mapName, this.draggingTileComponent.posY, this.draggingTileComponent.posX).then(() => {
                 console.log('Monster deleted');
             });
+            this.mainController.statisticsView.hide();
         }
 
         // cancel if placed on invalid tile

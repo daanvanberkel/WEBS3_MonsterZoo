@@ -515,6 +515,10 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     cancelBtn.setAttribute("id", "configurator-cancel-btn");
     container.appendChild(cancelBtn);
 
+    cancelBtn.addEventListener('click', () => {
+      this.reset();
+    });
+
     const saveBtn = document.createElement("button");
     saveBtn.innerHTML = "Opslaan";
     saveBtn.setAttribute("id", "configurator-save-btn");
@@ -533,9 +537,37 @@ export class MonsterConfiguratorComponent extends HTMLElement {
       });
   
       this.dispatchEvent(event);
+
+      this.reset();
     });
 
 
     return container;
+  }
+
+  reset() {
+    this.monster = new Monster();
+    this.monster.type = "water";
+    this.monster.arms = 2;
+    this.monster.armType = "tentacle";
+    this.monster.legs = 2;
+    this.monster.eyes = 2;
+    this.monster.fur = 'scales';
+    this.monster.fly = false;
+    this.monster.swim = true;
+    this.monster.color = 'blue';
+    console.log("resetting configurator", this.monster);
+    this.setSelectOptions();
+    this.setMonsterImage();
+    this.fieldElements["name"].value = this.monster.name;
+    this.fieldElements["type"].value = this.monster.type; 
+    this.fieldElements["arms"].value = this.monster.arms; 
+    this.fieldElements["armType"].value = this.monster.armType; 
+    this.fieldElements["legs"].value = this.monster.legs; 
+    this.fieldElements["eyes"].value = this.monster.eyes; 
+    this.fieldElements["fur"].value = this.monster.fur; 
+    this.fieldElements["fly"].value = this.monster.fly; 
+    this.fieldElements["swim"].value = this.monster.swim; 
+    this.fieldElements["color"].value = this.monster.color;
   }
 }
