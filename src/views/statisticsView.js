@@ -14,7 +14,7 @@ export class StatisticsView {
 
         // Create monster statistics HTML
         let monsterImg = document.createElement('img');
-        monsterImg.src = `/images/Monsters/${monster.type}/${monster.imgFile}`;
+        monsterImg.src = monster.imgFile;
         monsterImg.classList.add('monster-icon');
 
         monster_details.appendChild(monsterImg);

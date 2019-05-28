@@ -1,9 +1,8 @@
-export class MapView {
-    controller;
-    dragImg;
-    tiles;
+import Water1 from "../images/Monsters/Water/Water1.png";
 
+export class MapView {
     constructor(controller) {
+        this.dragImg = null;
         this.element = document.querySelector('#zoo');
         this.controller = controller;
         this.tiles = [];
@@ -55,7 +54,7 @@ export class MapView {
 
         // add draggable img
         this.dragImg = document.createElement('img');
-        this.dragImg.src = '/images/Monsters/Water/Water1.png';
+        this.dragImg.src = Water1;
         this.dragImg.classList.add('dragImg');
         this.element.appendChild(this.dragImg);
 

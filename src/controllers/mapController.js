@@ -3,10 +3,11 @@ import { MapService } from "../services/mapService.js";
 
 export class MapController {
 
-    mapName = 'forest';
-    draggingTileComponent;
-
     constructor(mainController) {
+        // Set initial properties
+        this.mapName = 'forest';
+        this.draggingTileComponent = null;
+
         // Main Controller
         this.mainController = mainController;
 
@@ -150,7 +151,7 @@ export class MapController {
         if (tileComponent.tile.monster == null){return;}
 
         this.draggingTileComponent = tileComponent;
-        this.mapView.dragImg.src = `/images/Monsters/${tileComponent.tile.monster.typeName}/${tileComponent.tile.monster.imgFile}`;
+        this.mapView.dragImg.src = tileComponent.tile.monster.imgFile;
         this.mapView.element.classList.add('drag');
         tileComponent.classList.add('hide-monster');
     }

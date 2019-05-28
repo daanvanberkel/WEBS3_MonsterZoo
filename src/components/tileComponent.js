@@ -1,7 +1,11 @@
 export class TileComponent extends HTMLElement {
-    posX;
-    posY;
-    tile;
+    constructor(data) {
+        super();
+
+        this.posX = data ? data.posX : null;
+        this.posY = data ? data.posY : null;
+        this.tile = data ? data.tile : null;
+    }
     
     connectedCallback() {
         this.render();
@@ -41,7 +45,7 @@ export class TileComponent extends HTMLElement {
 
         if (this.tile.monster) {
             let monsterImg = document.createElement('img');
-            monsterImg.src = `/images/Monsters/${this.tile.monster.typeName}/${this.tile.monster.imgFile}`;
+            monsterImg.src = this.tile.monster.imgFile;
             monsterImg.classList.add('monster');
             this.appendChild(monsterImg);
             this.classList.remove("free-tile");

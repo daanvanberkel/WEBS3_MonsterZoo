@@ -1,265 +1,270 @@
 import { Monster } from "../models/monster.js";
 
 export class MonsterConfiguratorComponent extends HTMLElement {
-  /* MONSTER VALUES */
-  monster = new Monster();
 
-  options = {
-    type: [
-      {
-        value: "water",
-        name: "Water"
-      },
-      {
-        value: "fire",
-        name: "Vuur"
-      },
-      {
-        value: "earth",
-        name: "Aarde"
-      },
-      {
-        value: "wind",
-        name: "Wind"
-      }
-    ],
-    arms: [
-      {
-        value: 2,
-        name: "2 Armen"
-      },
-      {
-        enableIf: [{ type: ["water", "fire"] }],
-        value: 4,
-        name: "4 Armen"
-      },
-      {
-        enableIf: [{ type: ["water", "fire"] }],
-        value: 6,
-        name: "6 Armen"
-      },
-      {
-        enableIf: [{ type: ["water"] }],
-        value: 8,
-        name: "8 Armen"
-      }
-    ],
-    armType: [
-      {
-        enableIf: [{ type: ["water", "fire"] }],
-        value: "tentacle",
-        name: "Tentakels"
-      },
-      {
-        enableIf: [{ type: ["water"] }],
-        value: "fins",
-        name: "Vinnen"
-      },
-      {
-        enableIf: [{ type: ["fire", "earth"] }],
-        value: "claws",
-        name: "Klauwen"
-      },
-      {
-        enableIf: [{ type: ["fire", "wind"] }],
-        value: "claw-wings",
-        name: "Klauw Vleugels"
-      },
-      {
-        enableIf: [{ type: ["wind"] }],
-        value: "wings",
-        name: "Vleugels"
-      }
-    ],
-    legs: [
-      {
-        enableIf: [
-          { type: ["water", "wind", "fire"] }, 
-        ],
-        value: 0,
-        name: "0 Legs"
-      },
-      {
-        enableIf: [
-          { type: ["water"], arms: [2, 4] },
-          { type: ["fire"], arms: [2] },
-          { type: ["earth", "wind"] },
-        ],
-        value: 2,
-        name: "2 Legs"
-      },
-      {
-        enableIf: [{ type: ["water"], arms: [2, 4] }, { type: ["earth"] }],
-        value: 4,
-        name: "4 Legs"
-      },
-      {
-        enableIf: [{ type: ["earth"] }],
-        value: 6,
-        name: "6 Legs"
-      }
-    ],
-    eyes: [
-      {
-        enableIf: [
-          { type: ["water", "fire", "earth", "wind"] }
-        ],
-        value: 2,
-        name: "2 Eyes"
-      },
-      {
-        enableIf: [
-          { type: ["water", "fire"] }
-        ],
-        value: 4,
-        name: "4 Eyes"
-      },
-      {
-        enableIf: [
-          { type: ["water"] }
-        ],
-        value: 6,
-        name: "6 Eyes"
-      },
-      {
-        enableIf: [
-          { type: ["water"] }
-        ],
-        value: 8,
-        name: "8 Eyes"
-      }
-    ],
-    fur: [
-      {
-        enableIf: [
-          { type: ["water", "fire", "earth", "wind"] }
-        ],
-        value: "scales",
-        name: "Schubben"
-      },
-      {
-        enableIf: [
-          { type: ["water", "earth"] }
-        ],
-        value: "slime",
-        name: "Slijm"
-      },
-      {
-        enableIf: [
-          { type: ["fire", "wind"] }
-        ],
-        value: "feathers",
-        name: "Veren"
-      },
-      {
-        enableIf: [
-          { type: ["earth", "wind"] }
-        ],
-        value: "hair",
-        name: "Haar"
-      }
-    ],
-    fly: [
-      {
-        enableIf: [
-          { type: ["water", "earth", "fire"] },
-        ],
-        value: false,
-        name: "Nee"
-      },
-      {
-        enableIf: [
-          { type: ["wind"] },
-          { type: ["fire"], fur : ['feathers'] }
-        ],
-        value: true,
-        name: "Ja"
-      }
-    ],
-    swim: [
-      {
-        enableIf: [
-          { type: ["fire", "earth", "wind"] }
-        ],
-        value: false,
-        name: "Nee"
-      },
-      {
-        enableIf: [
-          { type: ["water"] },
-          { type: ["wind"], fur : ['scales'] }
-        ],
-        value: true,
-        name: "Ja"
-      }
-    ],
-    color: [
-      {
-        enableIf: [
-          { type: ["water", "wind"] },
-        ],
-        value: "blue",
-        name: "Blauw"
-      },
-      {
-        enableIf: [
-          { type: ["water", "fire"] },
-        ],
-        value: "red",
-        name: "Rood"
-      },
-      {
-        enableIf: [
-          { type: ["water"] },
-        ],
-        value: "green",
-        name: "Groen"
-      },
-      {
-        enableIf: [
-          { type: ["fire", "earth"] },
-        ],
-        value: "orange",
-        name: "Oranje"
-      },
-      {
-        enableIf: [
-          { type: ["fire"] },
-        ],
-        value: "braun",
-        name: "Bruin"
-      },
-      {
-        enableIf: [
-          { type: ["earth", "wind"] },
-        ],
-        value: "purple",
-        name: "Paars"
-      },
-      {
-        enableIf: [
-          { type: ["earth", "wind"] },
-        ],
-        value: "white",
-        name: "Wit"
-      }
-    ]
-  };
+  constructor() {
+    super();
 
-  /* FIELD ELEMENTS */
-  fieldElements = {
-    img: null,
-    name: null,
-    type: null,
-    arms: null,
-    armType: null,
-    legs: null,
-    eyes: null,
-    fur: null,
-    fly: null,
-    swim: null,
-    color: null
-  };
+    /* MONSTER VALUES */
+    this.monster = new Monster();
+
+    this.options = {
+      type: [
+        {
+          value: "water",
+          name: "Water"
+        },
+        {
+          value: "fire",
+          name: "Vuur"
+        },
+        {
+          value: "earth",
+          name: "Aarde"
+        },
+        {
+          value: "wind",
+          name: "Wind"
+        }
+      ],
+      arms: [
+        {
+          value: 2,
+          name: "2 Armen"
+        },
+        {
+          enableIf: [{ type: ["water", "fire"] }],
+          value: 4,
+          name: "4 Armen"
+        },
+        {
+          enableIf: [{ type: ["water", "fire"] }],
+          value: 6,
+          name: "6 Armen"
+        },
+        {
+          enableIf: [{ type: ["water"] }],
+          value: 8,
+          name: "8 Armen"
+        }
+      ],
+      armType: [
+        {
+          enableIf: [{ type: ["water", "fire"] }],
+          value: "tentacle",
+          name: "Tentakels"
+        },
+        {
+          enableIf: [{ type: ["water"] }],
+          value: "fins",
+          name: "Vinnen"
+        },
+        {
+          enableIf: [{ type: ["fire", "earth"] }],
+          value: "claws",
+          name: "Klauwen"
+        },
+        {
+          enableIf: [{ type: ["fire", "wind"] }],
+          value: "claw-wings",
+          name: "Klauw Vleugels"
+        },
+        {
+          enableIf: [{ type: ["wind"] }],
+          value: "wings",
+          name: "Vleugels"
+        }
+      ],
+      legs: [
+        {
+          enableIf: [
+            { type: ["water", "wind", "fire"] }, 
+          ],
+          value: 0,
+          name: "0 Legs"
+        },
+        {
+          enableIf: [
+            { type: ["water"], arms: [2, 4] },
+            { type: ["fire"], arms: [2] },
+            { type: ["earth", "wind"] },
+          ],
+          value: 2,
+          name: "2 Legs"
+        },
+        {
+          enableIf: [{ type: ["water"], arms: [2, 4] }, { type: ["earth"] }],
+          value: 4,
+          name: "4 Legs"
+        },
+        {
+          enableIf: [{ type: ["earth"] }],
+          value: 6,
+          name: "6 Legs"
+        }
+      ],
+      eyes: [
+        {
+          enableIf: [
+            { type: ["water", "fire", "earth", "wind"] }
+          ],
+          value: 2,
+          name: "2 Eyes"
+        },
+        {
+          enableIf: [
+            { type: ["water", "fire"] }
+          ],
+          value: 4,
+          name: "4 Eyes"
+        },
+        {
+          enableIf: [
+            { type: ["water"] }
+          ],
+          value: 6,
+          name: "6 Eyes"
+        },
+        {
+          enableIf: [
+            { type: ["water"] }
+          ],
+          value: 8,
+          name: "8 Eyes"
+        }
+      ],
+      fur: [
+        {
+          enableIf: [
+            { type: ["water", "fire", "earth", "wind"] }
+          ],
+          value: "scales",
+          name: "Schubben"
+        },
+        {
+          enableIf: [
+            { type: ["water", "earth"] }
+          ],
+          value: "slime",
+          name: "Slijm"
+        },
+        {
+          enableIf: [
+            { type: ["fire", "wind"] }
+          ],
+          value: "feathers",
+          name: "Veren"
+        },
+        {
+          enableIf: [
+            { type: ["earth", "wind"] }
+          ],
+          value: "hair",
+          name: "Haar"
+        }
+      ],
+      fly: [
+        {
+          enableIf: [
+            { type: ["water", "earth", "fire"] },
+          ],
+          value: false,
+          name: "Nee"
+        },
+        {
+          enableIf: [
+            { type: ["wind"] },
+            { type: ["fire"], fur : ['feathers'] }
+          ],
+          value: true,
+          name: "Ja"
+        }
+      ],
+      swim: [
+        {
+          enableIf: [
+            { type: ["fire", "earth", "wind"] }
+          ],
+          value: false,
+          name: "Nee"
+        },
+        {
+          enableIf: [
+            { type: ["water"] },
+            { type: ["wind"], fur : ['scales'] }
+          ],
+          value: true,
+          name: "Ja"
+        }
+      ],
+      color: [
+        {
+          enableIf: [
+            { type: ["water", "wind"] },
+          ],
+          value: "blue",
+          name: "Blauw"
+        },
+        {
+          enableIf: [
+            { type: ["water", "fire"] },
+          ],
+          value: "red",
+          name: "Rood"
+        },
+        {
+          enableIf: [
+            { type: ["water"] },
+          ],
+          value: "green",
+          name: "Groen"
+        },
+        {
+          enableIf: [
+            { type: ["fire", "earth"] },
+          ],
+          value: "orange",
+          name: "Oranje"
+        },
+        {
+          enableIf: [
+            { type: ["fire"] },
+          ],
+          value: "braun",
+          name: "Bruin"
+        },
+        {
+          enableIf: [
+            { type: ["earth", "wind"] },
+          ],
+          value: "purple",
+          name: "Paars"
+        },
+        {
+          enableIf: [
+            { type: ["earth", "wind"] },
+          ],
+          value: "white",
+          name: "Wit"
+        }
+      ]
+    };
+
+    /* FIELD ELEMENTS */
+    this.fieldElements = {
+      img: null,
+      name: null,
+      type: null,
+      arms: null,
+      armType: null,
+      legs: null,
+      eyes: null,
+      fur: null,
+      fly: null,
+      swim: null,
+      color: null
+    };
+  }
 
   connectedCallback() {
 
@@ -287,7 +292,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     this.monster = monster;
     console.log("updating configurator", this.monster);
     this.setSelectOptions();
-    const imgUrl = `/images/Monsters/${this.monster.typeName}/${this.monster.imgFile}`;
+    const imgUrl = this.monster.imgFile;
     this.fieldElements["img"].src = imgUrl;
     this.fieldElements["name"].value = this.monster.name;
     this.fieldElements["type"].value = this.monster.type; 
@@ -317,8 +322,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
    */
   setMonsterImage() {
     this.monster.imageIndex = Math.floor(Math.random() * 4) + 1;
-    const imgUrl = `/images/Monsters/${this.monster.typeName}/${this.monster.imgFile}`;
-    this.fieldElements["img"].src = imgUrl;
+    this.fieldElements["img"].src = this.monster.imgFile;
   }
 
 

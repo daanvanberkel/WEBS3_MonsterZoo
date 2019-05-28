@@ -1,3 +1,6 @@
+import Sun from "../images/sun.svg";
+import Rain from "../images/rain.svg";
+
 export class WeatherView {
     constructor() {
         this.element = document.querySelector('#weatherContainer')
@@ -8,7 +11,7 @@ export class WeatherView {
         this.element.innerHTML = '';
 
         const icon = document.createElement('img');
-        icon.src = weather.raining ? '/images/rain.svg' : '/images/sun.svg';
+        icon.src = weather.raining ? Rain : Sun;
         icon.classList.add('weather-icon');
 
         this.element.appendChild(icon);
