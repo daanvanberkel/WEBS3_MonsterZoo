@@ -1,5 +1,6 @@
 import { MapView } from "../views/mapView.js";
 import { MapService } from "../services/mapService.js";
+import { throws } from "assert";
 
 export class MapController {
 
@@ -54,6 +55,51 @@ export class MapController {
      * @param {Monster} monster 
      */
     addMonster(monster) {
+        let monsterType = monster.typeName.toLowerCase();
+
+        // Add or remove strength based on map
+        switch(monsterType) {
+            case 'fire':
+                if (this.mapName == 'desert') {
+                    monster.increaseStrength(2);
+                } else if (this.mapName == 'snow') {
+                    monster.decreaseStrength(2);
+                };
+                break;
+
+            case 'earth':
+                if (this.mapName == 'forest') {
+                    monster.increaseStrength(2);
+                } else if (this.mapName == 'snow') {
+                    monster.decreaseStrength(2);
+                }
+                break;
+
+            case 'wind':
+                if (this.mapName == 'forest') {
+                    monster.decreaseStrength(2);
+                } else if (this.mapName == 'desert') {
+                    monster.increaseStrength(2);
+                }
+                break;
+
+            case 'water':
+                if (this.mapName == 'desert') {
+                    monster.decreaseStrength(2);
+                } else if (this.mapName == 'snow') {
+                    monster.increaseStrength(2);
+                }
+                break;
+        }
+        
+        this.addMonsterToMap(monster);
+    }
+
+    updateMonster(monster) {
+        this.addMonsterToMap(monster);
+    }
+
+    addMonsterToMap(monster) {
         // find free tile
         let tiles = Array.from(document.querySelectorAll("tile-component"));
 
@@ -74,7 +120,7 @@ export class MapController {
                 // TODO: Handle error in a nice way
             });
         }
-    }
+    } 
 
     /**
      * Add monsters from storage to the map and let the view draw the map

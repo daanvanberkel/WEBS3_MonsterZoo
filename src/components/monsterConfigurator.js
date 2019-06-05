@@ -5,6 +5,12 @@ export class MonsterConfiguratorComponent extends HTMLElement {
   constructor() {
     super();
 
+    document.addEventListener('weatherChange', e => {
+      this.weather = e.detail;
+    });
+
+    this.isNew = true;
+
     /* MONSTER VALUES */
     this.monster = new Monster();
 
@@ -289,6 +295,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
   }
 
   update(monster){
+    this.isNew = false;
     this.monster = monster;
     console.log("updating configurator", this.monster);
     this.setSelectOptions();
@@ -532,9 +539,17 @@ export class MonsterConfiguratorComponent extends HTMLElement {
         return;
       }
 
-      const event = new CustomEvent('monsterCreated', {
-        detail: this.monster
-      });
+      let event;
+
+      if (this.isNew) {
+        event = new CustomEvent('monsterCreated', {
+          detail: this.monster
+        });
+      } else {
+         event = new CustomEvent('monsterUpdated', {
+          detail: this.monster
+        });
+      }
   
       this.dispatchEvent(event);
 
@@ -546,6 +561,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
   }
 
   reset() {
+    this.isNew = true;
     this.monster = new Monster();
     this.monster.type = "water";
     this.monster.arms = 2;

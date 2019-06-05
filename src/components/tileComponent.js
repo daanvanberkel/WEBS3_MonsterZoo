@@ -66,7 +66,6 @@ export class TileComponent extends HTMLElement {
 
         var randomPauze = Math.random() * (500); 
 
-        console.log(randomPauze);
         setTimeout(() => {
 
             if (this.tile.monster == null){

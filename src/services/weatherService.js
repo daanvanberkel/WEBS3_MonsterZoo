@@ -14,6 +14,11 @@ export class WeatherService {
                     temp: temp
                 };
 
+                document.dispatchEvent(new CustomEvent('weatherChange', {
+                    bubbles: true,
+                    detail: this.weather
+                }));
+
                 console.log(`Set weather to ${JSON.stringify(this.weather)}`);
             },
 
@@ -35,17 +40,13 @@ export class WeatherService {
                         temp: response.main.temp
                     };
 
+                    weather.raining = false;
+
                     for(let w of response.weather) {
                         if (w.main === "Rain") {
                             weather.raining = true;
                             break;
                         }
-                    }
-
-                    if (response.wind) {
-                        weather.wind = response.wind;
-                    } else {
-                        weather.wind = {speed: 0};
                     }
 
                     document.dispatchEvent(new CustomEvent('weatherChange', {

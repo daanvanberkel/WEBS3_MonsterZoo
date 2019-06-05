@@ -28,8 +28,41 @@ export class Monster {
         this.fly = data ? data.fly : null;
         this.color = data ? data.color : null;
 
-        this.attackStrength = Math.floor(Math.random() * 4);
-        this.attackStrength += 3;
+        this.attackStrength = Math.floor(Math.random() * 4) + 3;
+        this.bonusStrength = 0;
+
+        document.addEventListener('weatherChange', e => {
+            this.bonusStrength = 0;
+
+            let weather = e.detail;
+            switch(this.typeName.toLowerCase()) {
+                case 'fire':
+                    if (weather.temp > 25) {
+                        this.bonusStrength += 2;
+                    } else if (weather.temp < 10) {
+                        this.bonusStrength -= 2;
+                    }
+
+                    if (weather.raining) {
+                        this.bonusStrength -= 2;
+                    }
+                    break;
+
+                case 'earth':
+                    if (weather.raining) {
+                        this.bonusStrength -= 2;
+                    }
+                    break;
+
+                case 'water':
+                    if (weather.raining) {
+                        this.bonusStrength += 2;
+                    }
+                    break;
+            }
+
+            console.log(this.bonusStrength, this);
+        });
     }
 
     increaseStrength(amount) {
@@ -49,7 +82,7 @@ export class Monster {
     }
 
     get strength() {
-        return this.attackStrength;
+        return this.attackStrength + this.bonusStrength;
     }
 
     get typeName(){

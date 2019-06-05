@@ -33,6 +33,7 @@ export class MainController {
         // Event listeners
         this.handleMonsterClick();
         this.monsterConfigurator.addEventListener('monsterCreated', e => this.mapController.addMonster(e.detail));
+        this.monsterConfigurator.addEventListener('monsterUpdated', e => this.mapController.updateMonster(e.detail));
     }
 
     start(mapName) {
