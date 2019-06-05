@@ -24,6 +24,10 @@ export class MapController {
         // Listeners
         this.addMapSwitchHandler();
         this.addTileDragHandler();
+
+        document.addEventListener('weatherChange', e => {
+            this.weatherView.drawWeather(e.detail);
+        });
     }
 
     /**
