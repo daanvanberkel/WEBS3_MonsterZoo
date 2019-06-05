@@ -34,4 +34,39 @@
         font-family: sans-serif;
         line-height: 1.3em;
     }
+
+    .monster-strength {
+        margin-top: 20px;
+        font-family: pixel;
+        font-size: 10px;
+        text-transform: uppercase;
+
+        .strength-bar {
+            height: 1.5em;
+            border: 1px solid;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+
+            & > div {
+                height: 100%;
+            }
+
+            &.fire > div{
+                background: orange;
+            }
+
+            &.water > div{
+                background: lightblue;
+            }
+
+            &.wind > div{
+                background: lightgray;
+            }
+
+            &.earth > div{
+                background: lightgreen;
+            }
+        }
+    }
 }

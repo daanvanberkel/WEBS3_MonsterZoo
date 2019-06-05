@@ -27,6 +27,29 @@ export class Monster {
         this.fur = data ? data.fur : null;
         this.fly = data ? data.fly : null;
         this.color = data ? data.color : null;
+
+        this.attackStrength = Math.floor(Math.random() * 4);
+        this.attackStrength += 3;
+    }
+
+    increaseStrength(amount) {
+        if ((this.attackStrength + amount) > 10) {
+            this.attackStrength = 10;
+        } else {
+            this.attackStrength += amount;
+        }
+    }
+
+    decreaseStrength(amount) {
+        if ((this.attackStrength - amount) < 0) {
+            this.attackStrength = 0;
+        } else {
+            this.attackStrength -= amount;
+        }
+    }
+
+    get strength() {
+        return this.attackStrength;
     }
 
     get typeName(){
@@ -35,6 +58,15 @@ export class Monster {
             type = 'water';
         }
         return type.charAt(0).toUpperCase() + type.slice(1);
+    }
+
+    get attack() {
+        switch(this.typeName.toLowerCase()) {
+            case 'water': return 'Tsunami';
+            case 'fire' : return 'Vuur spugen';
+            case 'wind': return 'Wind spin move';
+            case 'earth': return 'Aardbeving';
+        }
     }
 
     get imgFile(){

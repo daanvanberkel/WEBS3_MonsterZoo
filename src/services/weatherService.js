@@ -42,6 +42,17 @@ export class WeatherService {
                         }
                     }
 
+                    if (response.wind) {
+                        weather.wind = response.wind;
+                    } else {
+                        weather.wind = {speed: 0};
+                    }
+
+                    document.dispatchEvent(new CustomEvent('weatherChange', {
+                        bubbles: true,
+                        detail: weather
+                    }));
+
                     resolve(weather);
                 }).catch(reject);
             } else {

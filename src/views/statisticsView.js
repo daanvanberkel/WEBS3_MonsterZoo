@@ -78,6 +78,23 @@ export class StatisticsView {
             <b>${monster.arms} ${armType}</b> 
             en heeft een <b>${fur} vacht</b>.`;
         monster_details.appendChild(description);
+
+        let strengthPercentage = monster.strength / 10 * 100;
+
+        let strength = document.createElement('div');
+        strength.classList.add('monster-strength');
+        strength.innerHTML = `${monster.attack}:`;
+
+        let innerStrengthBar = document.createElement('div');
+        innerStrengthBar.style.width = `${strengthPercentage}%`;
+
+        let strengthBar = document.createElement('div');
+        strengthBar.classList.add(monster.typeName.toLowerCase());
+        strengthBar.classList.add('strength-bar');
+        strengthBar.appendChild(innerStrengthBar);
+        strength.appendChild(strengthBar);
+
+        monster_details.appendChild(strength);
         
         this.statistics.classList.add('show');
     }
