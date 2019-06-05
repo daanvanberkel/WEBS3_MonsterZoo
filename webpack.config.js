@@ -38,6 +38,12 @@ module.exports = {
             use: [
                 'file-loader'
             ]
+        },
+        {
+            test: /\.(mp3)$/,
+            use: [
+                'file-loader'
+            ]
         }]
     },
     plugins: [

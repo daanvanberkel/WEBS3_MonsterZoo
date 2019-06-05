@@ -1,3 +1,5 @@
+import soundFile from "../sound/grass.mp3";
+
 export class TileComponent extends HTMLElement {
     constructor(data) {
         super();
@@ -58,16 +60,36 @@ export class TileComponent extends HTMLElement {
     }
 
     react(){
-        if (this.tile.monster == null){
-            return;
-        }
 
-        // TODO: Play sound
+        var audio1 = new Audio(soundFile);
+        var audio2 = new Audio(soundFile);
 
-        this.classList.add('react');
+        var randomPauze = Math.random() * (500); 
 
+        console.log(randomPauze);
         setTimeout(() => {
-            this.classList.remove('react');
-        }, 1000);
+
+            if (this.tile.monster == null){
+                return;
+            }
+
+            setTimeout(() => {
+                audio1.play();
+
+                setTimeout(() => {
+                    audio2.play();
+                }, 550);
+
+            }, 200);
+
+            this.classList.add('react');
+
+            setTimeout(() => {
+                this.classList.remove('react');
+            }, 1000);
+            
+        }, randomPauze);
+
+        
     }
 }
