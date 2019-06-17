@@ -297,7 +297,6 @@ export class MonsterConfiguratorComponent extends HTMLElement {
   update(monster){
     this.isNew = false;
     this.monster = monster;
-    console.log("updating configurator", this.monster);
     this.setSelectOptions();
     const imgUrl = this.monster.imgFile;
     this.fieldElements["img"].src = imgUrl;
@@ -534,8 +533,7 @@ export class MonsterConfiguratorComponent extends HTMLElement {
 
     saveBtn.addEventListener('click', () => {
       if (!this.monster.name) {
-        console.log("Monster needs a name!");
-        // TODO: Show error to user
+        document.querySelector("toast-wrapper").addToast("PLEASE ENTER MONSTER NAME");
         return;
       }
 
@@ -545,13 +543,17 @@ export class MonsterConfiguratorComponent extends HTMLElement {
         event = new CustomEvent('monsterCreated', {
           detail: this.monster
         });
+        document.querySelector("toast-wrapper").addToast("MONSTER ADDED", true);
       } else {
          event = new CustomEvent('monsterUpdated', {
           detail: this.monster
         });
+        document.querySelector("toast-wrapper").addToast("MONSTER UPDATED", true);
       }
   
       this.dispatchEvent(event);
+
+      
 
       this.reset();
     });
@@ -572,7 +574,6 @@ export class MonsterConfiguratorComponent extends HTMLElement {
     this.monster.fly = false;
     this.monster.swim = true;
     this.monster.color = 'blue';
-    console.log("resetting configurator", this.monster);
     this.setSelectOptions();
     this.setMonsterImage();
     this.fieldElements["name"].value = this.monster.name;

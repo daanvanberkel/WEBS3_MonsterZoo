@@ -3,6 +3,7 @@ import { MapController } from "./mapController.js";
 import { MonsterService } from "../services/monsterService.js";
 import { MonsterConfiguratorComponent } from "../components/monsterConfigurator.js";
 import { TileComponent } from "../components/tileComponent.js";
+import { ToastWrapper } from "../components/toastWrapper.js";
 import { WeatherService } from "../services/weatherService.js";
 import { WeatherView } from "../views/weatherView.js";
 
@@ -16,6 +17,7 @@ export class MainController {
         // Register custom components
         window.customElements.define('monster-configurator', MonsterConfiguratorComponent);
         window.customElements.define('tile-component', TileComponent);
+        window.customElements.define('toast-wrapper', ToastWrapper);
 
         // Services
         this.monsterService = new MonsterService();

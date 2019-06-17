@@ -48,7 +48,7 @@ export class MapController {
                 this.weatherView.drawWeather(weather);
             });
         }).catch(err => {
-            console.log('Cannot load map');
+            document.querySelector("toast-wrapper").addToast("MAP LOAD ERROR");
             console.log(err);
         });
     }
@@ -115,13 +115,9 @@ export class MapController {
                 freeTile.tile.monster = monster;
                 freeTile.render();
                 this.mapView.monsterInteract(freeTile.posX, freeTile.posY);
-                console.log('Monster saved', freeTile);
             }).catch(err => {
-                // Error
-                console.log('Failed to save monster');
                 console.log(err);
-
-                // TODO: Handle error in a nice way
+                document.querySelector("toast-wrapper").addToast("ERROR");
             });
         }
     } 
@@ -225,9 +221,7 @@ export class MapController {
             this.mainController.monsterConfigurator.update(this.draggingTileComponent.tile.monster);
             this.draggingTileComponent.tile.monster = null;
             this.draggingTileComponent.render();
-            this.monsterService.deleteMonster(this.mapName, this.draggingTileComponent.posY, this.draggingTileComponent.posX).then(() => {
-                console.log('Monster deleted');
-            });
+            this.monsterService.deleteMonster(this.mapName, this.draggingTileComponent.posY, this.draggingTileComponent.posX);
             this.mainController.statisticsView.hide();
         }
 
@@ -251,11 +245,8 @@ export class MapController {
             this.monsterService.saveMonster(component.tile.monster, this.mapName, component.posY, component.posX).then(() => {
                 this.mapView.monsterInteract(component.posX, component.posY);
                 this.draggingTileComponent = null;
-                console.log('Monster saved');
             }).catch(err => {
-                console.log("Saving monster failed");
-                console.log(err);
-                // TODO: Show error to user
+                document.querySelector("toast-wrapper").addToast("ERROR");
             });
         });
     }
